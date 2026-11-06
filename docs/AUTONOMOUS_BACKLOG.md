@@ -43,7 +43,7 @@ The engineering assistant shall:
   - Comprehensive unit test in `test/unit/skill_endorsement_test.dart`.
 
 ### Sprint 03: Interview Availability Calendar Picker
-- [ ] **Task Definition:** Construct a multi-slot calendar scheduling interface allowing candidates to select preferred 30-minute interview time slots when accepting an interview invitation.
+- [x] **Task Definition:** Construct a multi-slot calendar scheduling interface allowing candidates to select preferred 30-minute interview time slots when accepting an interview invitation.
 - **Scope:** `lib/presentation/jobs/widgets/interview_scheduler_modal.dart`, `lib/presentation/jobs/viewmodels/interview_scheduler_viewmodel.dart`.
 - **Acceptance Criteria:**
   - Allows selecting up to three time slots from a 7-day rolling window.

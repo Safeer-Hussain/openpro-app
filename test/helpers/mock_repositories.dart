@@ -105,6 +105,30 @@ class MockJobRepository extends JobRepository {
     inMemoryJobs[idx] = updated;
     return updated;
   }
+
+  final Map<String, List<DateTime>> inMemoryScheduledSlots = {};
+
+  @override
+  Future<bool> scheduleInterviewSlots({
+    required String jobId,
+    required String userId,
+    required List<DateTime> slots,
+  }) async {
+    inMemoryScheduledSlots['${jobId}_$userId'] = List.from(slots);
+    final idx = inMemoryJobs.indexWhere((j) => j.id == jobId);
+    if (idx != -1) {
+      inMemoryJobs[idx] = inMemoryJobs[idx].copyWith(applicationStatus: 'interviewScheduled');
+    }
+    return true;
+  }
+
+  @override
+  Future<List<DateTime>> getScheduledSlots({
+    required String jobId,
+    required String userId,
+  }) async {
+    return List.from(inMemoryScheduledSlots['${jobId}_$userId'] ?? []);
+  }
 }
 
 class MockSocialRepository extends SocialRepository {

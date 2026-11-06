@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
@@ -88,6 +89,64 @@ class JobRepository {
     );
 
     return currentJob.copyWith(applicationStatus: status);
+  }
+
+  Future<bool> scheduleInterviewSlots({
+    required String jobId,
+    required String userId,
+    required List<DateTime> slots,
+  }) async {
+    final db = await database.database;
+    final slotsJson = jsonEncode(slots.map((d) => d.toIso8601String()).toList());
+    final now = DateTime.now().toIso8601String();
+
+    await db.insert(
+      DatabaseTables.applications,
+      {
+        'id': 'app_${jobId}_$userId',
+        'job_id': jobId,
+        'user_id': userId,
+        'status': 'interviewScheduled',
+        'cover_note': 'Interview slots proposed by candidate.',
+        'scheduled_slots': slotsJson,
+        'applied_at': now,
+        'updated_at': now,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+
+    await db.update(
+      DatabaseTables.jobs,
+      {'application_status': 'interviewScheduled'},
+      where: 'id = ?',
+      whereArgs: [jobId],
+    );
+
+    return true;
+  }
+
+  Future<List<DateTime>> getScheduledSlots({
+    required String jobId,
+    required String userId,
+  }) async {
+    final db = await database.database;
+    final results = await db.query(
+      DatabaseTables.applications,
+      where: 'job_id = ? AND user_id = ?',
+      whereArgs: [jobId, userId],
+      limit: 1,
+    );
+    if (results.isEmpty) return [];
+
+    final rawSlots = results.first['scheduled_slots'] as String?;
+    if (rawSlots == null || rawSlots.isEmpty) return [];
+
+    try {
+      final List<dynamic> parsed = jsonDecode(rawSlots);
+      return parsed.map((s) => DateTime.parse(s as String)).toList();
+    } catch (_) {
+      return [];
+    }
   }
 
   Future<void> addJob(JobEntity job) async {

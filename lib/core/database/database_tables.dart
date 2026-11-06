@@ -10,4 +10,5 @@ class DatabaseTables {
   static const String projects = 'projects';
   static const String chatMessages = 'chat_messages';
   static const String skillEndorsements = 'skill_endorsements';
+  static const String applications = 'applications';
 }
