@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/story_entity.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
@@ -18,7 +19,8 @@ class StoryViewerModal extends StatefulWidget {
   State<StoryViewerModal> createState() => _StoryViewerModalState();
 }
 
-class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerProviderStateMixin {
+class _StoryViewerModalState extends State<StoryViewerModal>
+    with SingleTickerProviderStateMixin {
   late int _currentIndex;
   late AnimationController _animController;
   bool _isPaused = false;
@@ -29,7 +31,9 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
     _currentIndex = widget.initialIndex;
     _animController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: widget.stories[_currentIndex].durationSeconds),
+      duration: Duration(
+        seconds: widget.stories[_currentIndex].durationSeconds,
+      ),
     );
 
     _animController.addStatusListener((status) {
@@ -51,7 +55,9 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
     if (_currentIndex < widget.stories.length - 1) {
       setState(() {
         _currentIndex++;
-        _animController.duration = Duration(seconds: widget.stories[_currentIndex].durationSeconds);
+        _animController.duration = Duration(
+          seconds: widget.stories[_currentIndex].durationSeconds,
+        );
         _animController.reset();
         _animController.forward();
       });
@@ -64,7 +70,9 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
     if (_currentIndex > 0) {
       setState(() {
         _currentIndex--;
-        _animController.duration = Duration(seconds: widget.stories[_currentIndex].durationSeconds);
+        _animController.duration = Duration(
+          seconds: widget.stories[_currentIndex].durationSeconds,
+        );
         _animController.reset();
         _animController.forward();
       });
@@ -109,10 +117,7 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
           fit: StackFit.expand,
           children: [
             // Background Story Media
-            Image.asset(
-              story.mediaUrl,
-              fit: BoxFit.cover,
-            ),
+            Image.asset(story.mediaUrl, fit: BoxFit.cover),
 
             // Top Gradient & Bottom Gradient
             Container(
@@ -133,7 +138,10 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
             // Safe Area Controls
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -157,8 +165,13 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
                                   child: LinearProgressIndicator(
                                     value: value,
                                     minHeight: 3,
-                                    backgroundColor: Colors.white.withValues(alpha: 0.3),
-                                    valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                                    backgroundColor: Colors.white.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                          Colors.white,
+                                        ),
                                   ),
                                 );
                               },
@@ -201,7 +214,10 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.close_rounded, color: Colors.white),
+                          icon: const Icon(
+                            Icons.close_rounded,
+                            color: Colors.white,
+                          ),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ],
@@ -215,7 +231,9 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.2),
+                        ),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,13 +263,29 @@ class _StoryViewerModalState extends State<StoryViewerModal> with SingleTickerPr
                     // Quick Reactions Row (All Vector Material Icons)
                     Row(
                       children: [
-                        _buildReactionButton(Icons.thumb_up_alt_rounded, 'Like', story.id),
+                        _buildReactionButton(
+                          Icons.thumb_up_alt_rounded,
+                          'Like',
+                          story.id,
+                        ),
                         const SizedBox(width: 10),
-                        _buildReactionButton(Icons.lightbulb_rounded, 'Insightful', story.id),
+                        _buildReactionButton(
+                          Icons.lightbulb_rounded,
+                          'Insightful',
+                          story.id,
+                        ),
                         const SizedBox(width: 10),
-                        _buildReactionButton(Icons.favorite_rounded, 'Appreciate', story.id),
+                        _buildReactionButton(
+                          Icons.favorite_rounded,
+                          'Appreciate',
+                          story.id,
+                        ),
                         const SizedBox(width: 10),
-                        _buildReactionButton(Icons.rocket_launch_rounded, 'Inspiring', story.id),
+                        _buildReactionButton(
+                          Icons.rocket_launch_rounded,
+                          'Inspiring',
+                          story.id,
+                        ),
                       ],
                     ),
                   ],

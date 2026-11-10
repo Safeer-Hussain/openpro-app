@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/presentation/community/viewmodels/community_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -19,37 +20,46 @@ void main() {
       expect(viewModel.selectedTabIndex, equals(0));
     });
 
-    test('toggleJoinGroup mutates isJoined and increments memberCount reactively', () async {
-      await viewModel.loadData();
-      final group = viewModel.groups.first;
-      final initialMembers = group.memberCount;
-      expect(group.isJoined, isFalse);
+    test(
+      'toggleJoinGroup mutates isJoined and increments memberCount reactively',
+      () async {
+        await viewModel.loadData();
+        final group = viewModel.groups.first;
+        final initialMembers = group.memberCount;
+        expect(group.isJoined, isFalse);
 
-      await viewModel.toggleJoinGroup(group.id);
-      expect(viewModel.groups.first.isJoined, isTrue);
-      expect(viewModel.groups.first.memberCount, equals(initialMembers + 1));
+        await viewModel.toggleJoinGroup(group.id);
+        expect(viewModel.groups.first.isJoined, isTrue);
+        expect(viewModel.groups.first.memberCount, equals(initialMembers + 1));
 
-      // Toggle back
-      await viewModel.toggleJoinGroup(group.id);
-      expect(viewModel.groups.first.isJoined, isFalse);
-      expect(viewModel.groups.first.memberCount, equals(initialMembers));
-    });
+        // Toggle back
+        await viewModel.toggleJoinGroup(group.id);
+        expect(viewModel.groups.first.isJoined, isFalse);
+        expect(viewModel.groups.first.memberCount, equals(initialMembers));
+      },
+    );
 
-    test('toggleRsvpEvent mutates isRsvp and increments attendeeCount reactively', () async {
-      await viewModel.loadData();
-      final event = viewModel.events.first;
-      final initialAttendees = event.attendeeCount;
-      expect(event.isRsvp, isFalse);
+    test(
+      'toggleRsvpEvent mutates isRsvp and increments attendeeCount reactively',
+      () async {
+        await viewModel.loadData();
+        final event = viewModel.events.first;
+        final initialAttendees = event.attendeeCount;
+        expect(event.isRsvp, isFalse);
 
-      await viewModel.toggleRsvpEvent(event.id);
-      expect(viewModel.events.first.isRsvp, isTrue);
-      expect(viewModel.events.first.attendeeCount, equals(initialAttendees + 1));
+        await viewModel.toggleRsvpEvent(event.id);
+        expect(viewModel.events.first.isRsvp, isTrue);
+        expect(
+          viewModel.events.first.attendeeCount,
+          equals(initialAttendees + 1),
+        );
 
-      // Toggle back
-      await viewModel.toggleRsvpEvent(event.id);
-      expect(viewModel.events.first.isRsvp, isFalse);
-      expect(viewModel.events.first.attendeeCount, equals(initialAttendees));
-    });
+        // Toggle back
+        await viewModel.toggleRsvpEvent(event.id);
+        expect(viewModel.events.first.isRsvp, isFalse);
+        expect(viewModel.events.first.attendeeCount, equals(initialAttendees));
+      },
+    );
 
     test('createEvent adds new event to list at index 0', () async {
       await viewModel.loadData();
@@ -66,7 +76,10 @@ void main() {
       );
 
       expect(viewModel.events.length, equals(initialCount + 1));
-      expect(viewModel.events.first.title, equals('Impeller Deep Dive Webinar'));
+      expect(
+        viewModel.events.first.title,
+        equals('Impeller Deep Dive Webinar'),
+      );
       expect(viewModel.events.first.isRsvp, isTrue);
     });
   });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../viewmodels/social_feed_viewmodel.dart';
 import 'widgets/create_post_modal.dart';
 import 'widgets/post_card.dart';
@@ -17,7 +18,10 @@ class SocialFeedView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         heroTag: 'fab_create_post',
         icon: const Icon(Icons.edit_note_rounded, size: 20),
-        label: const Text('Post Insight', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+        label: const Text(
+          'Post Insight',
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        ),
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -43,7 +47,11 @@ class SocialFeedView extends StatelessWidget {
                   width: 240,
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border(right: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
+                      border: Border(
+                        right: BorderSide(
+                          color: Theme.of(context).colorScheme.outlineVariant,
+                        ),
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,9 +67,7 @@ class SocialFeedView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: StoriesBar(stories: stories),
-                        ),
+                        Expanded(child: StoriesBar(stories: stories)),
                       ],
                     ),
                   ),
@@ -84,18 +90,13 @@ class SocialFeedView extends StatelessWidget {
           return CustomScrollView(
             physics: const ClampingScrollPhysics(),
             slivers: [
-              SliverToBoxAdapter(
-                child: StoriesBar(stories: stories),
-              ),
+              SliverToBoxAdapter(child: StoriesBar(stories: stories)),
               SliverPadding(
                 padding: const EdgeInsets.only(top: 6, bottom: 80),
                 sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return PostCard(post: posts[index]);
-                    },
-                    childCount: posts.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return PostCard(post: posts[index]);
+                  }, childCount: posts.length),
                 ),
               ),
             ],

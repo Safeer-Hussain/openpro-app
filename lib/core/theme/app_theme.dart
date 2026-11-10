@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 
 class AppTheme {
@@ -85,7 +86,10 @@ class AppTheme {
         selectedColor: AppColors.darkSurfaceContainerHighest,
         side: const BorderSide(color: AppColors.darkOutlineVariant),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        labelStyle: const TextStyle(fontSize: 12, color: AppColors.darkOnSurface),
+        labelStyle: const TextStyle(
+          fontSize: 12,
+          color: AppColors.darkOnSurface,
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -100,7 +104,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.electricCyan, width: 1.5),
+          borderSide: const BorderSide(
+            color: AppColors.electricCyan,
+            width: 1.5,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -110,7 +117,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.roseError, width: 1.5),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
       ),
     );
   }
@@ -198,7 +208,10 @@ class AppTheme {
         selectedColor: AppColors.lightSurfaceContainerHighest,
         side: const BorderSide(color: AppColors.lightOutlineVariant),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        labelStyle: const TextStyle(fontSize: 12, color: AppColors.lightOnSurface),
+        labelStyle: const TextStyle(
+          fontSize: 12,
+          color: AppColors.lightOnSurface,
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -213,7 +226,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.royalSapphire, width: 1.5),
+          borderSide: const BorderSide(
+            color: AppColors.royalSapphire,
+            width: 1.5,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -223,7 +239,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.roseError, width: 1.5),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
       ),
     );
   }

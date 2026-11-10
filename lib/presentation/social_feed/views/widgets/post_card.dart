@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/post_entity.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
@@ -57,7 +58,11 @@ class PostCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        Icon(Icons.verified_rounded, size: 14, color: colorScheme.primary),
+                        Icon(
+                          Icons.verified_rounded,
+                          size: 14,
+                          color: colorScheme.primary,
+                        ),
                       ],
                     ),
                     Text(
@@ -74,7 +79,10 @@ class PostCard extends StatelessWidget {
               ),
               Text(
                 post.timestamp,
-                style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ),
@@ -99,7 +107,11 @@ class PostCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.code_rounded, size: 14, color: colorScheme.primary),
+                      Icon(
+                        Icons.code_rounded,
+                        size: 14,
+                        color: colorScheme.primary,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         (post.codeLanguage ?? 'snippet').toUpperCase(),
@@ -114,11 +126,20 @@ class PostCard extends StatelessWidget {
                       IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
-                        icon: Icon(Icons.copy_rounded, size: 14, color: colorScheme.onSurfaceVariant),
+                        icon: Icon(
+                          Icons.copy_rounded,
+                          size: 14,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                         onPressed: () async {
-                          await Clipboard.setData(ClipboardData(text: post.codeSnippet!));
+                          await Clipboard.setData(
+                            ClipboardData(text: post.codeSnippet!),
+                          );
                           if (context.mounted) {
-                            AppFeedback.showSuccess(context, 'Code snippet copied to clipboard.');
+                            AppFeedback.showSuccess(
+                              context,
+                              'Code snippet copied to clipboard.',
+                            );
                           }
                         },
                       ),
@@ -174,13 +195,20 @@ class PostCard extends StatelessWidget {
                 onTap: () => vm.toggleLike(post.id),
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 6,
+                  ),
                   child: Row(
                     children: [
                       Icon(
-                        post.isLiked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                        post.isLiked
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_rounded,
                         size: 18,
-                        color: post.isLiked ? colorScheme.error : colorScheme.onSurfaceVariant,
+                        color: post.isLiked
+                            ? colorScheme.error
+                            : colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 6),
                       Text(
@@ -188,7 +216,9 @@ class PostCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: post.isLiked ? colorScheme.error : colorScheme.onSurfaceVariant,
+                          color: post.isLiked
+                              ? colorScheme.error
+                              : colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -207,11 +237,17 @@ class PostCard extends StatelessWidget {
                 },
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 6,
+                  ),
                   child: Row(
                     children: [
-                      Icon(Icons.chat_bubble_outline_rounded,
-                          size: 17, color: colorScheme.onSurfaceVariant),
+                      Icon(
+                        Icons.chat_bubble_outline_rounded,
+                        size: 17,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         '${post.commentsCount}',
@@ -231,10 +267,17 @@ class PostCard extends StatelessWidget {
                 onTap: () => vm.repost(post.id),
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 6,
+                  ),
                   child: Row(
                     children: [
-                      Icon(Icons.repeat_rounded, size: 18, color: colorScheme.onSurfaceVariant),
+                      Icon(
+                        Icons.repeat_rounded,
+                        size: 18,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         '${post.sharesCount}',
@@ -254,9 +297,13 @@ class PostCard extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: Icon(
-                  post.isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+                  post.isBookmarked
+                      ? Icons.bookmark_rounded
+                      : Icons.bookmark_border_rounded,
                   size: 18,
-                  color: post.isBookmarked ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                  color: post.isBookmarked
+                      ? colorScheme.primary
+                      : colorScheme.onSurfaceVariant,
                 ),
                 onPressed: () => vm.toggleBookmark(post.id),
               ),
@@ -265,7 +312,11 @@ class PostCard extends StatelessWidget {
               IconButton(
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
-                icon: Icon(Icons.share_outlined, size: 18, color: colorScheme.onSurfaceVariant),
+                icon: Icon(
+                  Icons.share_outlined,
+                  size: 18,
+                  color: colorScheme.onSurfaceVariant,
+                ),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,

@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/domain/entities/skill_endorsement.dart';
 import 'package:open_pro/presentation/profile/viewmodels/profile_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -33,10 +34,7 @@ void main() {
         ],
       );
 
-      final updated = original.copyWith(
-        count: 6,
-        isEndorsedByMe: true,
-      );
+      final updated = original.copyWith(count: 6, isEndorsedByMe: true);
 
       expect(updated.skillName, equals('Dart Concurrency'));
       expect(updated.count, equals(6));
@@ -49,7 +47,10 @@ void main() {
       await viewModel.loadProfile();
 
       expect(viewModel.endorsements, isNotEmpty);
-      expect(viewModel.endorsements.first.skillName, equals('Flutter & Dart Architecture'));
+      expect(
+        viewModel.endorsements.first.skillName,
+        equals('Flutter & Dart Architecture'),
+      );
       expect(viewModel.endorsements.first.count, equals(3));
       expect(viewModel.endorsements.first.isEndorsedByMe, isFalse);
       expect(viewModel.endorsements.first.topEndorsers.length, equals(3));
@@ -80,21 +81,27 @@ void main() {
       expect(updatedSkill.topEndorsers.any((e) => e.name == 'You'), isTrue);
     });
 
-    test('toggleEndorsement twice toggles state back and decrements count', () async {
-      await viewModel.loadProfile();
+    test(
+      'toggleEndorsement twice toggles state back and decrements count',
+      () async {
+        await viewModel.loadProfile();
 
-      final initialCount = viewModel.endorsements.first.count;
+        final initialCount = viewModel.endorsements.first.count;
 
-      // First toggle: endorse
-      await viewModel.toggleEndorsement('Flutter & Dart Architecture');
-      expect(viewModel.endorsements.first.isEndorsedByMe, isTrue);
-      expect(viewModel.endorsements.first.count, equals(initialCount + 1));
+        // First toggle: endorse
+        await viewModel.toggleEndorsement('Flutter & Dart Architecture');
+        expect(viewModel.endorsements.first.isEndorsedByMe, isTrue);
+        expect(viewModel.endorsements.first.count, equals(initialCount + 1));
 
-      // Second toggle: un-endorse
-      await viewModel.toggleEndorsement('Flutter & Dart Architecture');
-      expect(viewModel.endorsements.first.isEndorsedByMe, isFalse);
-      expect(viewModel.endorsements.first.count, equals(initialCount));
-      expect(viewModel.endorsements.first.topEndorsers.any((e) => e.name == 'You'), isFalse);
-    });
+        // Second toggle: un-endorse
+        await viewModel.toggleEndorsement('Flutter & Dart Architecture');
+        expect(viewModel.endorsements.first.isEndorsedByMe, isFalse);
+        expect(viewModel.endorsements.first.count, equals(initialCount));
+        expect(
+          viewModel.endorsements.first.topEndorsers.any((e) => e.name == 'You'),
+          isFalse,
+        );
+      },
+    );
   });
 }

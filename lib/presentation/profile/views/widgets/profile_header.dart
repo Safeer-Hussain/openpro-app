@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/utils/app_feedback.dart';
@@ -37,13 +38,18 @@ class ProfileHeader extends StatelessWidget {
               GestureDetector(
                 onLongPress: () {
                   Scaffold.of(context).openEndDrawer();
-                  AppFeedback.showInfo(context, 'Developer & Recruiter Debug Drawer opened.');
+                  AppFeedback.showInfo(
+                    context,
+                    'Developer & Recruiter Debug Drawer opened.',
+                  );
                 },
                 child: Stack(
                   children: [
                     CircleAvatar(
                       radius: 28,
-                      backgroundImage: const AssetImage(AssetPaths.safeerAvatar),
+                      backgroundImage: const AssetImage(
+                        AssetPaths.safeerAvatar,
+                      ),
                       backgroundColor: colorScheme.surfaceContainerHighest,
                     ),
                     if (profile.isOpenToWork)
@@ -55,9 +61,16 @@ class ProfileHeader extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: colorScheme.tertiary,
                             shape: BoxShape.circle,
-                            border: Border.all(color: colorScheme.surfaceContainer, width: 2),
+                            border: Border.all(
+                              color: colorScheme.surfaceContainer,
+                              width: 2,
+                            ),
                           ),
-                          child: Icon(Icons.check, size: 10, color: colorScheme.onTertiary),
+                          child: Icon(
+                            Icons.check,
+                            size: 10,
+                            color: colorScheme.onTertiary,
+                          ),
                         ),
                       ),
                   ],
@@ -72,7 +85,9 @@ class ProfileHeader extends StatelessWidget {
                     padding: const EdgeInsets.all(6),
                     constraints: const BoxConstraints(),
                     icon: Icon(
-                      themeProvider.isDarkMode ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                      themeProvider.isDarkMode
+                          ? Icons.light_mode_rounded
+                          : Icons.dark_mode_rounded,
                       size: 16,
                       color: colorScheme.onSurface,
                     ),
@@ -84,7 +99,11 @@ class ProfileHeader extends StatelessWidget {
                     visualDensity: VisualDensity.compact,
                     padding: const EdgeInsets.all(6),
                     constraints: const BoxConstraints(),
-                    icon: Icon(Icons.bug_report_outlined, size: 16, color: colorScheme.primary),
+                    icon: Icon(
+                      Icons.bug_report_outlined,
+                      size: 16,
+                      color: colorScheme.primary,
+                    ),
                     tooltip: 'Recruiter & Latency Debug Drawer',
                     onPressed: () => Scaffold.of(context).openEndDrawer(),
                   ),
@@ -126,7 +145,11 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Icon(Icons.verified_rounded, size: 16, color: colorScheme.primary),
+              Icon(
+                Icons.verified_rounded,
+                size: 16,
+                color: colorScheme.primary,
+              ),
             ],
           ),
           const SizedBox(height: 2),
@@ -170,9 +193,13 @@ class ProfileHeader extends StatelessWidget {
             children: [
               FilterChip(
                 avatar: Icon(
-                  profile.isOpenToWork ? Icons.check_circle_rounded : Icons.work_outline_rounded,
+                  profile.isOpenToWork
+                      ? Icons.check_circle_rounded
+                      : Icons.work_outline_rounded,
                   size: 14,
-                  color: profile.isOpenToWork ? colorScheme.onTertiary : colorScheme.onSurface,
+                  color: profile.isOpenToWork
+                      ? colorScheme.onTertiary
+                      : colorScheme.onSurface,
                 ),
                 label: const Text('Open to Work'),
                 selected: profile.isOpenToWork,
@@ -181,7 +208,9 @@ class ProfileHeader extends StatelessWidget {
                 labelStyle: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: profile.isOpenToWork ? colorScheme.onTertiary : colorScheme.onSurface,
+                  color: profile.isOpenToWork
+                      ? colorScheme.onTertiary
+                      : colorScheme.onSurface,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 onSelected: (_) {
@@ -196,9 +225,13 @@ class ProfileHeader extends StatelessWidget {
               ),
               FilterChip(
                 avatar: Icon(
-                  profile.isHiring ? Icons.check_circle_rounded : Icons.person_add_outlined,
+                  profile.isHiring
+                      ? Icons.check_circle_rounded
+                      : Icons.person_add_outlined,
                   size: 14,
-                  color: profile.isHiring ? colorScheme.onPrimary : colorScheme.onSurface,
+                  color: profile.isHiring
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurface,
                 ),
                 label: const Text('We are Hiring'),
                 selected: profile.isHiring,
@@ -207,7 +240,9 @@ class ProfileHeader extends StatelessWidget {
                 labelStyle: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: profile.isHiring ? colorScheme.onPrimary : colorScheme.onSurface,
+                  color: profile.isHiring
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurface,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 onSelected: (_) {

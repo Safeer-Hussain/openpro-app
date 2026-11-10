@@ -11,7 +11,8 @@ class AssetPaths {
   static const String cybercoreLogo = 'assets/images/cybercore.png';
 
   // Group Covers
-  static const String flutterArchitectsCover = 'assets/images/flutter_architects.png';
+  static const String flutterArchitectsCover =
+      'assets/images/flutter_architects.png';
   static const String aiLlmCover = 'assets/images/ai_llm_engineering.png';
   static const String cloudDevopsCover = 'assets/images/cloud_devops.png';
   static const String fintechLeadersCover = 'assets/images/fintech_leaders.png';

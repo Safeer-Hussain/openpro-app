@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/repositories/social_repository.dart';
 import '../../../domain/entities/comment_entity.dart';
 import '../../../domain/entities/post_entity.dart';
@@ -46,7 +47,9 @@ class SocialFeedViewModel extends ChangeNotifier {
 
     final current = _posts[index];
     final willBeLiked = !current.isLiked;
-    final newCount = willBeLiked ? current.likesCount + 1 : (current.likesCount - 1).clamp(0, 999999);
+    final newCount = willBeLiked
+        ? current.likesCount + 1
+        : (current.likesCount - 1).clamp(0, 999999);
 
     final updated = current.copyWith(
       isLiked: willBeLiked,
@@ -147,7 +150,10 @@ class SocialFeedViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addComment({required String postId, required String content}) async {
+  Future<void> addComment({
+    required String postId,
+    required String content,
+  }) async {
     final newComment = CommentEntity(
       id: 'com_${DateTime.now().millisecondsSinceEpoch}',
       postId: postId,
@@ -220,7 +226,9 @@ class SocialFeedViewModel extends ChangeNotifier {
     if (index == -1) return;
 
     final current = _stories[index];
-    _stories[index] = current.copyWith(reactionCount: current.reactionCount + 1);
+    _stories[index] = current.copyWith(
+      reactionCount: current.reactionCount + 1,
+    );
     notifyListeners();
 
     try {

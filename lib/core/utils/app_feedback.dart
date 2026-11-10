@@ -58,9 +58,7 @@ class AppFeedback {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         elevation: 4,
         backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         content: Row(
           children: [
             Icon(icon, color: foregroundColor, size: 20),

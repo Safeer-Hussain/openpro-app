@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../domain/entities/chat_message_entity.dart';
 
@@ -6,11 +7,7 @@ class ChatBubble extends StatelessWidget {
   final ChatMessageEntity message;
   final Function(String)? onChipTapped;
 
-  const ChatBubble({
-    super.key,
-    required this.message,
-    this.onChipTapped,
-  });
+  const ChatBubble({super.key, required this.message, this.onChipTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,9 @@ class ChatBubble extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser) ...[
@@ -31,16 +30,25 @@ class ChatBubble extends StatelessWidget {
                 color: colorScheme.primaryContainer,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.auto_awesome_rounded, size: 18, color: colorScheme.primary),
+              child: Icon(
+                Icons.auto_awesome_rounded,
+                size: 18,
+                color: colorScheme.primary,
+              ),
             ),
             const SizedBox(width: 8),
           ],
           Flexible(
             child: Column(
-              crossAxisAlignment: isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment: isUser
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     color: isUser
                         ? colorScheme.primary
@@ -48,11 +56,17 @@ class ChatBubble extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(18),
                       topRight: const Radius.circular(18),
-                      bottomLeft: isUser ? const Radius.circular(18) : const Radius.circular(4),
-                      bottomRight: isUser ? const Radius.circular(4) : const Radius.circular(18),
+                      bottomLeft: isUser
+                          ? const Radius.circular(18)
+                          : const Radius.circular(4),
+                      bottomRight: isUser
+                          ? const Radius.circular(4)
+                          : const Radius.circular(18),
                     ),
                     border: Border.all(
-                      color: isUser ? Colors.transparent : colorScheme.outlineVariant,
+                      color: isUser
+                          ? Colors.transparent
+                          : colorScheme.outlineVariant,
                     ),
                   ),
                   child: Text(
@@ -60,7 +74,9 @@ class ChatBubble extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.45,
-                      color: isUser ? colorScheme.onPrimary : colorScheme.onSurface,
+                      color: isUser
+                          ? colorScheme.onPrimary
+                          : colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -81,7 +97,9 @@ class ChatBubble extends StatelessWidget {
                         ),
                         backgroundColor: colorScheme.surfaceContainerHighest,
                         side: BorderSide(color: colorScheme.outlineVariant),
-                        onPressed: onChipTapped != null ? () => onChipTapped!(chipText) : null,
+                        onPressed: onChipTapped != null
+                            ? () => onChipTapped!(chipText)
+                            : null,
                       );
                     }).toList(),
                   ),

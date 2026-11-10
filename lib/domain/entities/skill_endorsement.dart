@@ -12,18 +12,18 @@ class Endorser {
   });
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'title': title,
-        'avatar_url': avatarUrl,
-      };
+    'id': id,
+    'name': name,
+    'title': title,
+    'avatar_url': avatarUrl,
+  };
 
   factory Endorser.fromMap(Map<String, dynamic> map) => Endorser(
-        id: map['id'] as String? ?? '',
-        name: map['name'] as String? ?? '',
-        title: map['title'] as String? ?? '',
-        avatarUrl: map['avatar_url'] as String? ?? '',
-      );
+    id: map['id'] as String? ?? '',
+    name: map['name'] as String? ?? '',
+    title: map['title'] as String? ?? '',
+    avatarUrl: map['avatar_url'] as String? ?? '',
+  );
 }
 
 class SkillEndorsement {

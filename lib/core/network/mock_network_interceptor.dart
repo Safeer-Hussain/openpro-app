@@ -1,6 +1,8 @@
 import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants/app_constants.dart';
 
 class MockNetworkInterceptor extends Interceptor {
@@ -14,12 +16,17 @@ class MockNetworkInterceptor extends Interceptor {
   Future<void> _loadSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      simulatedLatencyMs = prefs.getInt(AppConstants.prefSimulatedLatencyMs) ?? 650;
-      simulateError503 = prefs.getBool(AppConstants.prefSimulateError503) ?? false;
+      simulatedLatencyMs =
+          prefs.getInt(AppConstants.prefSimulatedLatencyMs) ?? 650;
+      simulateError503 =
+          prefs.getBool(AppConstants.prefSimulateError503) ?? false;
     } catch (_) {}
   }
 
-  Future<void> updateSettings({required int latencyMs, required bool error503}) async {
+  Future<void> updateSettings({
+    required int latencyMs,
+    required bool error503,
+  }) async {
     simulatedLatencyMs = latencyMs;
     simulateError503 = error503;
     try {
@@ -30,7 +37,10 @@ class MockNetworkInterceptor extends Interceptor {
   }
 
   @override
-  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     // Inject configured simulated latency
     final jitter = Random().nextInt(150);
     final totalDelay = simulatedLatencyMs + jitter;
@@ -44,7 +54,9 @@ class MockNetworkInterceptor extends Interceptor {
             requestOptions: options,
             statusCode: 503,
             statusMessage: 'Simulated 503 Service Unavailable (Debug Mode)',
-            data: {'error': 'Service temporarily overloaded. Retry available in debug drawer.'},
+            data: {
+              'error': 'Service temporarily overloaded. Retry available in debug drawer.',
+            },
           ),
           type: DioExceptionType.badResponse,
         ),

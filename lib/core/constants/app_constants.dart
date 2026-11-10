@@ -6,9 +6,11 @@ class AppConstants {
   // Seeded Profile Constants
   static const String defaultUserId = 'usr_safeer_001';
   static const String defaultUserName = 'Safeer Hussain';
-  static const String defaultUserRole = 'Senior Flutter Architect & Mobile Team Lead';
+  static const String defaultUserRole =
+      'Senior Flutter Architect & Mobile Team Lead';
   static const String defaultUserCompany = 'OpenPro Labs';
-  static const String defaultUserLocation = 'San Francisco, CA (Open to Worldwide Remote)';
+  static const String defaultUserLocation =
+      'San Francisco, CA (Open to Worldwide Remote)';
   static const String defaultUserBio =
       'Principal Mobile Architect building resilient, high-scale cross-platform systems. Specialist in Flutter runtime performance, offline-first SQLite architectures, and AI-driven recruiter matching engines.';
 

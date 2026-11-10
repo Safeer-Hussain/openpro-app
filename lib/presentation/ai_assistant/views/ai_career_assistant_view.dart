@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../viewmodels/ai_assistant_viewmodel.dart';
 import 'widgets/chat_bubble.dart';
@@ -58,10 +59,15 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
             children: [
               // Assistant Header Bar
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
-                  border: Border(bottom: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    bottom: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -71,7 +77,11 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                         color: colorScheme.primaryContainer,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.psychology_rounded, size: 20, color: colorScheme.primary),
+                      child: Icon(
+                        Icons.psychology_rounded,
+                        size: 20,
+                        color: colorScheme.primary,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -114,16 +124,24 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                 padding: const EdgeInsets.symmetric(vertical: 6),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerLowest,
-                  border: Border(bottom: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    bottom: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  children: AiAssistantViewModel.defaultActionChips.map((chipText) {
+                  children: AiAssistantViewModel.defaultActionChips.map((
+                    chipText,
+                  ) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: ActionChip(
-                        avatar: Icon(Icons.bolt_rounded, size: 14, color: colorScheme.primary),
+                        avatar: Icon(
+                          Icons.bolt_rounded,
+                          size: 14,
+                          color: colorScheme.primary,
+                        ),
                         label: Text(chipText),
                         labelStyle: TextStyle(
                           fontSize: 11,
@@ -132,7 +150,9 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                         ),
                         backgroundColor: colorScheme.surfaceContainer,
                         side: BorderSide(color: colorScheme.outlineVariant),
-                        onPressed: vm.isStreaming ? null : () => _handleSend(chipText),
+                        onPressed: vm.isStreaming
+                            ? null
+                            : () => _handleSend(chipText),
                       ),
                     );
                   }).toList(),
@@ -156,7 +176,10 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
 
                     // Active streaming token card
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 6,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -167,12 +190,19 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                               color: colorScheme.primaryContainer,
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(Icons.auto_awesome_rounded, size: 18, color: colorScheme.primary),
+                            child: Icon(
+                              Icons.auto_awesome_rounded,
+                              size: 18,
+                              color: colorScheme.primary,
+                            ),
                           ),
                           const SizedBox(width: 8),
                           Flexible(
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                               decoration: BoxDecoration(
                                 color: colorScheme.surfaceContainer,
                                 borderRadius: const BorderRadius.only(
@@ -181,7 +211,9 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                                   bottomLeft: Radius.circular(4),
                                   bottomRight: Radius.circular(18),
                                 ),
-                                border: Border.all(color: colorScheme.outlineVariant),
+                                border: Border.all(
+                                  color: colorScheme.outlineVariant,
+                                ),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,7 +269,9 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+                    border: Border(
+                      top: BorderSide(color: colorScheme.outlineVariant),
+                    ),
                   ),
                   child: Row(
                     children: [
@@ -246,11 +280,17 @@ class _AiCareerAssistantViewState extends State<AiCareerAssistantView> {
                           controller: _inputController,
                           textInputAction: TextInputAction.send,
                           onSubmitted: (val) => _handleSend(val),
-                          style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: colorScheme.onSurface,
+                          ),
                           decoration: InputDecoration(
                             hintText: 'Ask about career matches, resume gaps, or pitch...',
                             isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 10,
+                            ),
                             fillColor: colorScheme.surfaceContainer,
                           ),
                         ),

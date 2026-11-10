@@ -23,14 +23,11 @@ class LocalNotificationService {
   final List<RecruiterNotification> _notifications = [];
 
   Stream<RecruiterNotification> get notificationStream => _controller.stream;
-  List<RecruiterNotification> get notifications => List.unmodifiable(_notifications);
+  List<RecruiterNotification> get notifications =>
+      List.unmodifiable(_notifications);
   int get unreadCount => _notifications.length;
 
-  void triggerRecruiterMatch({
-    String? company,
-    String? role,
-    int? matchScore,
-  }) {
+  void triggerRecruiterMatch({String? company, String? role, int? matchScore}) {
     final comp = company ?? 'CloudScale Global';
     final r = role ?? 'Principal Flutter Architect';
     final score = matchScore ?? 96;

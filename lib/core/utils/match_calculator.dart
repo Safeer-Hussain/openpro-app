@@ -8,22 +8,26 @@ class MatchCalculator {
   }) {
     if (jobSkills.isEmpty) return 75;
 
-    final normalizedCandidateSkills =
-        candidateSkills.map((s) => s.trim().toLowerCase()).toSet();
-    final normalizedJobSkills =
-        jobSkills.map((s) => s.trim().toLowerCase()).toSet();
+    final normalizedCandidateSkills = candidateSkills
+        .map((s) => s.trim().toLowerCase())
+        .toSet();
+    final normalizedJobSkills = jobSkills
+        .map((s) => s.trim().toLowerCase())
+        .toSet();
 
     // 1. Skill Match Weight: 60%
     int matchedSkillsCount = 0;
     for (final skill in normalizedJobSkills) {
       if (normalizedCandidateSkills.contains(skill) ||
           normalizedCandidateSkills.any(
-              (cs) => cs.contains(skill) || skill.contains(cs))) {
+            (cs) => cs.contains(skill) || skill.contains(cs),
+          )) {
         matchedSkillsCount++;
       }
     }
 
-    final double skillScore = (matchedSkillsCount / normalizedJobSkills.length) * 60.0;
+    final double skillScore =
+        (matchedSkillsCount / normalizedJobSkills.length) * 60.0;
 
     // 2. Role Title Overlap Weight: 25%
     final candidateTokens = candidateTitle

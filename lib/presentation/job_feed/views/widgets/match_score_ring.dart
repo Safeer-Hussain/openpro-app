@@ -4,11 +4,7 @@ class MatchScoreRing extends StatelessWidget {
   final int score;
   final double size;
 
-  const MatchScoreRing({
-    super.key,
-    required this.score,
-    this.size = 52,
-  });
+  const MatchScoreRing({super.key, required this.score, this.size = 52});
 
   @override
   Widget build(BuildContext context) {

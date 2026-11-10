@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import '../database/app_database.dart';
 import '../network/api_client.dart';
 import '../network/mock_network_interceptor.dart';

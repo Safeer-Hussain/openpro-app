@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../domain/entities/user_profile_entity.dart';
 
 class RecruiterAnalyticsCard extends StatelessWidget {
@@ -31,7 +32,11 @@ class RecruiterAnalyticsCard extends StatelessWidget {
                   color: colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(Icons.analytics_rounded, size: 18, color: colorScheme.primary),
+                child: Icon(
+                  Icons.analytics_rounded,
+                  size: 18,
+                  color: colorScheme.primary,
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -50,7 +55,10 @@ class RecruiterAnalyticsCard extends StatelessWidget {
                     ),
                     Text(
                       'Real-time engagement from top tech recruiters',
-                      style: TextStyle(fontSize: 11, color: colorScheme.onSurfaceVariant),
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -115,7 +123,11 @@ class RecruiterAnalyticsCard extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 'High: 580',
-                style: TextStyle(fontSize: 11, color: colorScheme.primary, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
@@ -152,7 +164,10 @@ class RecruiterAnalyticsCard extends StatelessWidget {
                       getTitlesWidget: (val, meta) {
                         return Text(
                           '${val.toInt()}',
-                          style: TextStyle(fontSize: 9, color: colorScheme.onSurfaceVariant),
+                          style: TextStyle(
+                            fontSize: 9,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         );
                       },
                     ),
@@ -168,7 +183,10 @@ class RecruiterAnalyticsCard extends StatelessWidget {
                         if (idx >= 0 && idx < days.length) {
                           return Text(
                             days[idx],
-                            style: TextStyle(fontSize: 9, color: colorScheme.onSurfaceVariant),
+                            style: TextStyle(
+                              fontSize: 9,
+                              color: colorScheme.onSurfaceVariant,
+                            ),
                           );
                         }
                         return const SizedBox.shrink();
@@ -237,14 +255,22 @@ class RecruiterAnalyticsCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: colorScheme.onSurfaceVariant),
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurfaceVariant,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 3),
           Text(
             value,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: colorScheme.onSurface),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+              color: colorScheme.onSurface,
+            ),
           ),
           const SizedBox(height: 1),
           Text(
@@ -252,7 +278,9 @@ class RecruiterAnalyticsCard extends StatelessWidget {
             style: TextStyle(
               fontSize: 9,
               fontWeight: FontWeight.w600,
-              color: isPositive ? colorScheme.tertiary : colorScheme.onSurfaceVariant,
+              color: isPositive
+                  ? colorScheme.tertiary
+                  : colorScheme.onSurfaceVariant,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

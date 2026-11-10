@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../domain/entities/story_entity.dart';
 import 'create_story_modal.dart';
 import 'story_viewer_modal.dart';
@@ -54,7 +55,10 @@ class StoriesBar extends StatelessWidget {
                   height: 58,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: colorScheme.outlineVariant, width: 2),
+                    border: Border.all(
+                      color: colorScheme.outlineVariant,
+                      width: 2,
+                    ),
                     color: colorScheme.surfaceContainerHighest,
                   ),
                   child: const Center(
@@ -71,7 +75,11 @@ class StoriesBar extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: colorScheme.surface, width: 2),
                     ),
-                    child: Icon(Icons.add, size: 14, color: colorScheme.onPrimary),
+                    child: Icon(
+                      Icons.add,
+                      size: 14,
+                      color: colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ],
@@ -107,10 +115,8 @@ class StoriesBar extends StatelessWidget {
             context,
             PageRouteBuilder(
               opaque: false,
-              pageBuilder: (_, _, _) => StoryViewerModal(
-                stories: stories,
-                initialIndex: storyIndex,
-              ),
+              pageBuilder: (_, _, _) =>
+                  StoryViewerModal(stories: stories, initialIndex: storyIndex),
             ),
           );
         },
@@ -122,7 +128,11 @@ class StoriesBar extends StatelessWidget {
                 shape: BoxShape.circle,
                 gradient: hasUnviewed
                     ? LinearGradient(
-                        colors: [colorScheme.primary, colorScheme.secondary, colorScheme.tertiary],
+                        colors: [
+                          colorScheme.primary,
+                          colorScheme.secondary,
+                          colorScheme.tertiary,
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       )

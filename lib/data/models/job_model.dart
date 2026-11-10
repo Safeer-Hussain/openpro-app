@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import '../../domain/entities/job_entity.dart';
 
 class JobModel extends JobEntity {
@@ -56,7 +57,8 @@ class JobModel extends JobEntity {
       applicationStatus: map['application_status'] as String? ?? 'none',
       matchScore: (map['match_score'] as num?)?.toInt() ?? 80,
       recruiterName: map['recruiter_name'] as String? ?? 'Lead Talent Partner',
-      recruiterTitle: map['recruiter_title'] as String? ?? 'Technical Recruiter',
+      recruiterTitle:
+          map['recruiter_title'] as String? ?? 'Technical Recruiter',
     );
   }
 

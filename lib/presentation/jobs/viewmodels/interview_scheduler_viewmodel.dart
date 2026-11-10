@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../core/constants/app_constants.dart';
 import '../../../data/repositories/job_repository.dart';
 import '../../../domain/entities/job_entity.dart';
@@ -21,15 +22,16 @@ class InterviewSchedulerViewModel extends ChangeNotifier {
     required this.job,
     String? userId,
     DateTime? currentTime,
-  })  : userId = userId ?? AppConstants.defaultUserId,
-        now = currentTime ?? DateTime.now() {
+  }) : userId = userId ?? AppConstants.defaultUserId,
+       now = currentTime ?? DateTime.now() {
     _initializeDays();
   }
 
   bool get isSubmitting => _isSubmitting;
   String? get errorMessage => _errorMessage;
   int get selectedCount => selectedSlots.length;
-  bool get canConfirm => selectedSlots.isNotEmpty && selectedSlots.length <= 3 && !_isSubmitting;
+  bool get canConfirm =>
+      selectedSlots.isNotEmpty && selectedSlots.length <= 3 && !_isSubmitting;
 
   void _initializeDays() {
     availableDays = List.generate(7, (index) {
@@ -70,7 +72,9 @@ class InterviewSchedulerViewModel extends ChangeNotifier {
   }
 
   bool toggleSlot(DateTime slot) {
-    final existingIndex = selectedSlots.indexWhere((s) => s.isAtSameMomentAs(slot));
+    final existingIndex = selectedSlots.indexWhere(
+      (s) => s.isAtSameMomentAs(slot),
+    );
 
     if (existingIndex != -1) {
       selectedSlots.removeAt(existingIndex);

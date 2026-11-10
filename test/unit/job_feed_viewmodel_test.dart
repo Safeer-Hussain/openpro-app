@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/presentation/job_feed/viewmodels/job_feed_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -44,20 +45,23 @@ void main() {
       expect(viewModel.jobs.first.isBookmarked, isFalse);
     });
 
-    test('Submits 1-tap smart application and updates status to applied', () async {
-      await viewModel.loadJobs();
-      final targetJob = viewModel.jobs.first;
-      expect(targetJob.isApplied, isFalse);
+    test(
+      'Submits 1-tap smart application and updates status to applied',
+      () async {
+        await viewModel.loadJobs();
+        final targetJob = viewModel.jobs.first;
+        expect(targetJob.isApplied, isFalse);
 
-      final success = await viewModel.applyToJob(
-        jobId: targetJob.id,
-        coverNote: 'Excited to bring Flutter architecture mastery.',
-        portfolioUrl: 'https://github.com/Safeer-Hussain/openpro',
-      );
+        final success = await viewModel.applyToJob(
+          jobId: targetJob.id,
+          coverNote: 'Excited to bring Flutter architecture mastery.',
+          portfolioUrl: 'https://github.com/Safeer-Hussain/openpro',
+        );
 
-      expect(success, isTrue);
-      expect(viewModel.jobs.first.applicationStatus, equals('applied'));
-      expect(viewModel.jobs.first.isApplied, isTrue);
-    });
+        expect(success, isTrue);
+        expect(viewModel.jobs.first.applicationStatus, equals('applied'));
+        expect(viewModel.jobs.first.isApplied, isTrue);
+      },
+    );
   });
 }

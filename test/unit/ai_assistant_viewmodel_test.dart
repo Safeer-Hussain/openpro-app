@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/presentation/ai_assistant/viewmodels/ai_assistant_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -21,7 +22,9 @@ void main() {
     test('Guarantees isStreaming resets to false on message completion in finally block', () async {
       await viewModel.loadMessages();
 
-      final future = viewModel.sendMessage('Analyze My Match for Senior Flutter Roles');
+      final future = viewModel.sendMessage(
+        'Analyze My Match for Senior Flutter Roles',
+      );
       // While awaiting, verify it processes and finishes with isStreaming == false
       await future;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/event_entity.dart';
 import '../../viewmodels/community_viewmodel.dart';
@@ -56,9 +57,13 @@ class EventCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      event.isVirtual ? Icons.videocam_rounded : Icons.location_on_rounded,
+                      event.isVirtual
+                          ? Icons.videocam_rounded
+                          : Icons.location_on_rounded,
                       size: 12,
-                      color: event.isVirtual ? colorScheme.primary : colorScheme.secondary,
+                      color: event.isVirtual
+                          ? colorScheme.primary
+                          : colorScheme.secondary,
                     ),
                     const SizedBox(width: 4),
                     Text(
@@ -66,7 +71,9 @@ class EventCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
-                        color: event.isVirtual ? colorScheme.primary : colorScheme.secondary,
+                        color: event.isVirtual
+                            ? colorScheme.primary
+                            : colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -90,7 +97,11 @@ class EventCard extends StatelessWidget {
           // Date & Location
           Row(
             children: [
-              Icon(Icons.calendar_today_rounded, size: 14, color: colorScheme.primary),
+              Icon(
+                Icons.calendar_today_rounded,
+                size: 14,
+                color: colorScheme.primary,
+              ),
               const SizedBox(width: 6),
               Text(
                 event.dateDescription,
@@ -105,12 +116,19 @@ class EventCard extends StatelessWidget {
           const SizedBox(height: 4),
           Row(
             children: [
-              Icon(Icons.pin_drop_outlined, size: 14, color: colorScheme.onSurfaceVariant),
+              Icon(
+                Icons.pin_drop_outlined,
+                size: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
                   event.locationOrLink,
-                  style: TextStyle(fontSize: 11.5, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -135,7 +153,10 @@ class EventCard extends StatelessWidget {
               runSpacing: 4,
               children: event.speakers.map((s) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(6),
@@ -161,7 +182,11 @@ class EventCard extends StatelessWidget {
           // Footer: Attendees Count & RSVP Button
           Row(
             children: [
-              Icon(Icons.how_to_reg_rounded, size: 16, color: colorScheme.onSurfaceVariant),
+              Icon(
+                Icons.how_to_reg_rounded,
+                size: 16,
+                color: colorScheme.onSurfaceVariant,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -178,19 +203,33 @@ class EventCard extends StatelessWidget {
               const SizedBox(width: 8),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: event.isRsvp ? colorScheme.tertiary : colorScheme.primary,
-                  foregroundColor: event.isRsvp ? colorScheme.onTertiary : colorScheme.onPrimary,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: event.isRsvp
+                      ? colorScheme.tertiary
+                      : colorScheme.primary,
+                  foregroundColor: event.isRsvp
+                      ? colorScheme.onTertiary
+                      : colorScheme.onPrimary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   elevation: 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
                 ),
                 icon: Icon(
-                  event.isRsvp ? Icons.check_circle_rounded : Icons.event_available_rounded,
+                  event.isRsvp
+                      ? Icons.check_circle_rounded
+                      : Icons.event_available_rounded,
                   size: 16,
                 ),
                 label: Text(
                   event.isRsvp ? 'Attending' : '1-Tap RSVP',
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 onPressed: () {
                   vm.toggleRsvpEvent(event.id);

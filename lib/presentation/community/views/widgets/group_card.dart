@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/group_entity.dart';
 import '../../viewmodels/community_viewmodel.dart';
@@ -49,7 +50,10 @@ class GroupCard extends StatelessWidget {
                   bottom: 8,
                   left: 12,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(6),
@@ -111,7 +115,11 @@ class GroupCard extends StatelessWidget {
                 // Footer Row: Members & Join Button
                 Row(
                   children: [
-                    Icon(Icons.people_alt_outlined, size: 15, color: colorScheme.onSurfaceVariant),
+                    Icon(
+                      Icons.people_alt_outlined,
+                      size: 15,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
@@ -141,7 +149,10 @@ class GroupCard extends StatelessWidget {
                               ? BorderSide(color: colorScheme.outlineVariant)
                               : BorderSide.none,
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 6,
+                        ),
                         visualDensity: VisualDensity.compact,
                       ),
                       onPressed: () {
@@ -155,7 +166,10 @@ class GroupCard extends StatelessWidget {
                       },
                       child: Text(
                         group.isJoined ? 'Joined' : 'Join Guild',
-                        style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ],

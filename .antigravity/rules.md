@@ -1,79 +1,82 @@
-# OpenPro Autonomous Sprint Automation Rules
+# OpenPro Autonomous Sprint Engineering Rules & Governance
 
 These rules govern the autonomous execution of engineering sprints for OpenPro.
 
-## Trigger Phrase
-When the user issues the exact command or instruction:
-```text
-run daily sprint
-```
+## Trigger Phrases
+Whenever the user issues any of the following commands:
+- `run daily sprint`
+- `run sprint`
+- `next sprint`
 
-The AI agent MUST autonomously execute the following deterministic cycle:
-
----
-
-### Step 1: Identify Next Sprint
-1. Read `docs/AUTONOMOUS_BACKLOG.md`.
-2. Locate the very first unchecked task item matching `- [ ] **Task Definition:**`.
-3. If all items are marked `- [x]`, inform the user that all 25 sprints have been successfully delivered and suggest generating a comprehensive release report.
+The AI agent MUST autonomously execute the following mandatory 6-Phase Protocol:
 
 ---
 
-### Step 2: Implementation Standards
-1. **Clean Architecture & SOLID:**
-   - Place entities in `lib/domain/entities/`.
-   - Place repository interfaces in `lib/domain/repositories/`.
-   - Place data models and repository implementations in `lib/data/`.
-   - Place ViewModels (`ChangeNotifier`) and UI views/widgets in `lib/presentation/`.
-   - Register any new services, repositories, or ViewModels in `lib/core/services/service_locator.dart`.
-2. **Strict Zero Hardcoded Colors:**
-   - Resolve all colors dynamically via `Theme.of(context).colorScheme`.
-   - Never use `Colors.black`, `Colors.white`, `Colors.grey`, or hardcoded `Color(0x...)` values in presentation widgets.
-3. **Strict Zero Emojis:**
-   - Never include emojis in source code, UI strings, comments, debug logs, commit messages, or documentation.
-   - Use vector Material Symbols (`Icons.*`) exclusively for icons.
-4. **Hero Tag Exclusivity:**
-   - Any new `FloatingActionButton` MUST define a unique, explicit `heroTag` string.
-5. **Responsive & Landscape Safety:**
-   - Ensure all layouts conform to compact landscape heights (360dp) without `RenderFlex` overflow stripes.
-   - Constrain text inside rows with `Expanded` or `Flexible` and specify `overflow: TextOverflow.ellipsis`.
-   - In `GridView`, use explicit `mainAxisExtent` bounds rather than squished aspect ratios.
+### MANDATORY 6-PHASE PROTOCOL FOR "run daily sprint"
 
----
+#### PHASE 1: PRE-FLIGHT HEALTH CHECK (BEFORE TOUCHING NEW CODE)
+- Never start a new feature on a broken or dirty repository.
+- Run:
+  1. `git status` and `git pull --rebase origin main` (ensure local branch is synced with GitHub).
+  2. `flutter pub get`
+  3. `flutter analyze`
+  4. `flutter test`
+- If ANY pre-flight error, warning, or unpushed commit exists from a previous session, fix and resolve it FIRST before reading the backlog.
 
-### Step 3: Test Suite Implementation
-1. For every implemented sprint, write comprehensive automated tests in `test/unit/` or `test/widget/`.
-2. Mock dependencies cleanly using `get_it` or fake classes without blocking platform channel timeouts.
-3. Verify all edge cases defined in the sprint acceptance criteria.
+#### PHASE 2: BACKLOG SELECTION & ARCHITECTURAL PLANNING
+- Open `docs/AUTONOMOUS_BACKLOG.md` and select the first unchecked `[ ]` item.
+- If all items in `docs/AUTONOMOUS_BACKLOG.md` are marked `[x]`, autonomously generate 15 new senior-level architectural or feature sprints in `docs/AUTONOMOUS_BACKLOG.md` and select the first new `[ ]` item.
 
----
+#### PHASE 3: PRODUCTION IMPLEMENTATION & UI SAFETY
+- Implement the selected feature end-to-end across `data/`, `domain/`, and `presentation/` following SOLID, DRY, and Clean Architecture.
+- Enforce strict UI & Runtime Safety:
+  - **Zero Emojis Policy:** Never use emojis anywhere in source code, UI strings, logs, or commit messages. Vector Material Symbols (`Icons.*`) exclusively.
+  - **Zero Hardcoded Colors:** Resolve all colors dynamically via `Theme.of(context).colorScheme` (`surface`, `surfaceContainer`, `surfaceContainerHighest`, `onSurface`, `onSurfaceVariant`, `primary`, `secondary`, `outlineVariant`). Test both Dark and Light mode parity.
+  - **Hero Tag Exclusivity:** Explicit unique `heroTag` string on every `FloatingActionButton` (e.g. `heroTag: 'fab_job_feed'`, `heroTag: 'fab_create_post'`).
+  - **Landscape Safety (360dp Viewport):** Independent vertical scroll controllers, explicit `mainAxisExtent` on all `GridView` items, text wrapped in `Expanded` or `Flexible` with `overflow: TextOverflow.ellipsis`, and edge-to-edge charts.
+  - **Complete Interactivity:** Every button, chip, dialog, filter, and share sheet must be 100% wired and functional with `AppFeedback` alerts and inline form validation.
 
-### Step 4: Verification and Quality Gate
-1. Execute static analysis:
-   ```powershell
-   flutter analyze
-   ```
-   Zero issues, warnings, or lints are permitted. Any finding must be resolved immediately before proceeding.
-2. Execute automated test suite:
-   ```powershell
-   flutter test
-   ```
-   100% of tests across the entire repository must pass.
+#### PHASE 4: AUTOMATED & LIVE DEVICE RUNTIME VERIFICATION
+- Add or update unit and widget tests in `test/` covering the new feature AND verifying zero landscape overflow (800x360 viewport).
+- Execute the verification gate:
+  ```powershell
+  dart run tool/sprint_gate.dart
+  ```
+  (or run the full sequence: `flutter pub get` -> `dart format lib test` -> `flutter analyze` -> `flutter test`).
+- **Live Connected Device Runtime Check:**
+  - If a physical Android/iOS device or emulator is connected via USB, run the app on the connected device (`flutter run -d <deviceId>`).
+  - Wait for the `SplashView` animation transition into the main shell.
+  - Inspect device runtime logs (`adb logcat -d` / console output).
+  - If ANY of the following prohibited exceptions appear, fix the code and re-test until 0 exceptions occur:
+    - `EXCEPTION CAUGHT BY`
+    - `A RenderFlex overflowed by`
+    - `There are multiple heroes that share the same tag`
+    - `No observables detected in the build method of Observer`
+    - `setState() or markNeedsBuild() called during build`
+    - `AndroidRuntime: FATAL EXCEPTION`
+    - `Unhandled Exception:`
 
----
+#### PHASE 5: ATOMIC GIT COMMIT & GUARANTEED GITHUB PUSH
+- Mark the completed item as `[x]` in `docs/AUTONOMOUS_BACKLOG.md`.
+- Stage all files:
+  ```powershell
+  git add -A
+  ```
+- Commit with a clean conventional commit message without emojis:
+  ```powershell
+  git commit --no-gpg-sign -m "feat(<module>): <concise senior description>"
+  ```
+- Push to GitHub:
+  ```powershell
+  git push origin main
+  ```
 
-### Step 5: Mark Completed, Commit, and Push
-1. In `docs/AUTONOMOUS_BACKLOG.md`, update the target sprint checkbox from `- [ ]` to `- [x]`.
-2. Stage all modifications and newly created files:
-   ```powershell
-   git add .
-   ```
-3. Create a Conventional Commit without emojis:
-   ```powershell
-   git commit -m "feat(sprint-XX): <short descriptive summary of implemented feature>"
-   ```
-4. Push the commit to the remote repository:
-   ```powershell
-   git push origin main
-   ```
-5. Report to the user with a concise summary of the delivered sprint, files modified, and test verification results.
+#### PHASE 6: POST-PUSH PROOF VERIFICATION (NEVER SKIP)
+- After running `git push origin main`, you MUST execute:
+  ```powershell
+  git status -sb
+  git log origin/main..HEAD --oneline
+  ```
+- Verify that `git log origin/main..HEAD` returns 0 unpushed commits and the working tree is 100% clean.
+- If the push failed due to network timeout or remote changes, run `git pull --rebase origin main` and `git push origin main` again until remote sync is confirmed.
+- Report the exact Commit SHA, modified files, test count, device runtime status, and confirmed `origin/main` push status to the user.

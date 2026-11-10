@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../viewmodels/profile_viewmodel.dart';
 import 'widgets/developer_debug_drawer.dart';
 import 'widgets/edit_profile_modal.dart';
@@ -30,7 +31,10 @@ class ProfileView extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             heroTag: 'fab_profile_edit',
             icon: const Icon(Icons.edit_rounded, size: 20),
-            label: const Text('Edit Profile', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+            label: const Text(
+              'Edit Profile',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+            ),
             onPressed: () {
               showModalBottomSheet(
                 context: context,

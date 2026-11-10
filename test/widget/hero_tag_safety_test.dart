@@ -14,12 +14,15 @@ import 'package:open_pro/presentation/profile/viewmodels/debug_settings_viewmode
 import 'package:open_pro/presentation/profile/viewmodels/profile_viewmodel.dart';
 import 'package:open_pro/presentation/social_feed/viewmodels/social_feed_viewmodel.dart';
 import 'package:provider/provider.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
   setUp(() async {
     if (!sl.isRegistered<LocalNotificationService>()) {
-      sl.registerSingleton<LocalNotificationService>(LocalNotificationService());
+      sl.registerSingleton<LocalNotificationService>(
+        LocalNotificationService(),
+      );
     }
   });
 
@@ -33,11 +36,21 @@ void main() {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => JobFeedViewModel(repository: mockJobRepo)),
-        ChangeNotifierProvider(create: (_) => SocialFeedViewModel(repository: mockSocialRepo)),
-        ChangeNotifierProvider(create: (_) => AiAssistantViewModel(repository: mockAiRepo)),
-        ChangeNotifierProvider(create: (_) => CommunityViewModel(repository: mockCommunityRepo)),
-        ChangeNotifierProvider(create: (_) => ProfileViewModel(repository: mockProfileRepo)),
+        ChangeNotifierProvider(
+          create: (_) => JobFeedViewModel(repository: mockJobRepo),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SocialFeedViewModel(repository: mockSocialRepo),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AiAssistantViewModel(repository: mockAiRepo),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CommunityViewModel(repository: mockCommunityRepo),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProfileViewModel(repository: mockProfileRepo),
+        ),
         ChangeNotifierProvider(
           create: (_) => DebugSettingsViewModel(
             mockInterceptor: MockNetworkInterceptor(),
@@ -53,7 +66,9 @@ void main() {
     );
   }
 
-  testWidgets('Zero duplicate Hero tag exceptions across multi-tab shell', (tester) async {
+  testWidgets('Zero duplicate Hero tag exceptions across multi-tab shell', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {

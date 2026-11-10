@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../core/services/service_locator.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../data/repositories/skill_repository.dart';
@@ -13,10 +14,10 @@ class ProfileViewModel extends ChangeNotifier {
   List<SkillEndorsement> _endorsements = [];
   bool _isLoading = true;
 
-  ProfileViewModel({
-    required this.repository,
-    SkillRepository? skillRepository,
-  })  : skillRepository = skillRepository ?? (sl.isRegistered<SkillRepository>() ? sl<SkillRepository>() : null) {
+  ProfileViewModel({required this.repository, SkillRepository? skillRepository})
+    : skillRepository =
+          skillRepository ??
+          (sl.isRegistered<SkillRepository>() ? sl<SkillRepository>() : null) {
     loadProfile();
   }
 
@@ -30,7 +31,9 @@ class ProfileViewModel extends ChangeNotifier {
     try {
       _profile = await repository.getUserProfile();
       if (_profile != null && skillRepository != null) {
-        _endorsements = await skillRepository!.getEndorsementsForUser(_profile!.id);
+        _endorsements = await skillRepository!.getEndorsementsForUser(
+          _profile!.id,
+        );
       }
     } catch (_) {}
     _isLoading = false;
@@ -55,7 +58,9 @@ class ProfileViewModel extends ChangeNotifier {
 
     final current = _endorsements[index];
     final newIsEndorsed = !current.isEndorsedByMe;
-    final newCount = newIsEndorsed ? current.count + 1 : (current.count - 1).clamp(0, 9999);
+    final newCount = newIsEndorsed
+        ? current.count + 1
+        : (current.count - 1).clamp(0, 9999);
 
     final updatedTopEndorsers = List<Endorser>.from(current.topEndorsers);
     if (newIsEndorsed) {
@@ -170,7 +175,9 @@ class ProfileViewModel extends ChangeNotifier {
       description: description,
     );
 
-    final updatedExperiences = List<ExperienceEntity>.from(_profile!.experiences)..insert(0, newExp);
+    final updatedExperiences = List<ExperienceEntity>.from(
+      _profile!.experiences,
+    )..insert(0, newExp);
     _profile = _profile!.copyWith(experiences: updatedExperiences);
     notifyListeners();
 
@@ -198,7 +205,8 @@ class ProfileViewModel extends ChangeNotifier {
       liveUrl: liveUrl,
     );
 
-    final updatedProjects = List<ProjectEntity>.from(_profile!.projects)..insert(0, newProj);
+    final updatedProjects = List<ProjectEntity>.from(_profile!.projects)
+      ..insert(0, newProj);
     _profile = _profile!.copyWith(projects: updatedProjects);
     notifyListeners();
 

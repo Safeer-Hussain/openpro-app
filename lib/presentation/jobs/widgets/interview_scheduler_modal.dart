@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/job_entity.dart';
 import '../viewmodels/interview_scheduler_viewmodel.dart';
@@ -78,7 +79,8 @@ class InterviewSchedulerModal extends StatelessWidget {
                           children: [
                             Text(
                               'Select Interview Availability',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: colorScheme.onSurface,
                                   ),
@@ -87,7 +89,8 @@ class InterviewSchedulerModal extends StatelessWidget {
                             ),
                             Text(
                               '${job.title} • ${job.company}',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
                                     color: colorScheme.onSurfaceVariant,
                                   ),
                               maxLines: 1,
@@ -97,7 +100,10 @@ class InterviewSchedulerModal extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: viewModel.selectedCount > 0
                               ? colorScheme.primaryContainer
@@ -111,7 +117,8 @@ class InterviewSchedulerModal extends StatelessWidget {
                         ),
                         child: Text(
                           '${viewModel.selectedCount}/3 Slots',
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
                                 color: viewModel.selectedCount > 0
                                     ? colorScheme.onPrimaryContainer
                                     : colorScheme.onSurfaceVariant,
@@ -141,7 +148,8 @@ class InterviewSchedulerModal extends StatelessWidget {
                         Expanded(
                           child: Text(
                             'Select up to three 30-minute interview windows from the next 7 days. At least 24 hours advance notice is enforced.',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
                                   color: colorScheme.onSurfaceVariant,
                                   fontSize: 11.5,
                                 ),
@@ -154,9 +162,9 @@ class InterviewSchedulerModal extends StatelessWidget {
                   Text(
                     'Rolling 7-Day Window (${monthFormat.format(viewModel.selectedDay)})',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   SizedBox(
@@ -167,12 +175,15 @@ class InterviewSchedulerModal extends StatelessWidget {
                       separatorBuilder: (_, _) => const SizedBox(width: 8),
                       itemBuilder: (context, idx) {
                         final day = viewModel.availableDays[idx];
-                        final isDaySelected = day.year == viewModel.selectedDay.year &&
+                        final isDaySelected =
+                            day.year == viewModel.selectedDay.year &&
                             day.month == viewModel.selectedDay.month &&
                             day.day == viewModel.selectedDay.day;
 
                         final daySlots = viewModel.getSlotsForDay(day);
-                        final selectedCountOnDay = daySlots.where(viewModel.isSlotSelected).length;
+                        final selectedCountOnDay = daySlots
+                            .where(viewModel.isSlotSelected)
+                            .length;
 
                         return InkWell(
                           onTap: () => viewModel.selectDay(day),
@@ -199,7 +210,9 @@ class InterviewSchedulerModal extends StatelessWidget {
                                   dayFormat.format(day),
                                   style: TextStyle(
                                     fontSize: 12,
-                                    fontWeight: isDaySelected ? FontWeight.bold : FontWeight.w500,
+                                    fontWeight: isDaySelected
+                                        ? FontWeight.bold
+                                        : FontWeight.w500,
                                     color: isDaySelected
                                         ? colorScheme.onPrimaryContainer
                                         : colorScheme.onSurface,
@@ -227,38 +240,49 @@ class InterviewSchedulerModal extends StatelessWidget {
                   Text(
                     'Available 30-Minute Slots',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: viewModel.getSlotsForDay(viewModel.selectedDay).map((slot) {
+                    children: viewModel.getSlotsForDay(viewModel.selectedDay).map((
+                      slot,
+                    ) {
                       final isValid = viewModel.isSlotValid(slot);
                       final isSelected = viewModel.isSlotSelected(slot);
                       final endTime = slot.add(const Duration(minutes: 30));
 
                       return InkWell(
-                        onTap: isValid ? () => viewModel.toggleSlot(slot) : null,
+                        onTap: isValid
+                            ? () => viewModel.toggleSlot(slot)
+                            : null,
                         borderRadius: BorderRadius.circular(10),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 180),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? colorScheme.primary
                                 : (isValid
-                                    ? colorScheme.surfaceContainerHighest
-                                    : colorScheme.surfaceContainer.withValues(alpha: 0.5)),
+                                      ? colorScheme.surfaceContainerHighest
+                                      : colorScheme.surfaceContainer.withValues(
+                                          alpha: 0.5,
+                                        )),
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: isSelected
                                   ? colorScheme.primary
                                   : (isValid
-                                      ? colorScheme.outlineVariant
-                                      : colorScheme.outlineVariant.withValues(alpha: 0.3)),
+                                        ? colorScheme.outlineVariant
+                                        : colorScheme.outlineVariant.withValues(
+                                            alpha: 0.3,
+                                          )),
                             ),
                           ),
                           child: Row(
@@ -272,20 +296,24 @@ class InterviewSchedulerModal extends StatelessWidget {
                                 color: isSelected
                                     ? colorScheme.onPrimary
                                     : (isValid
-                                        ? colorScheme.onSurfaceVariant
-                                        : colorScheme.onSurfaceVariant.withValues(alpha: 0.3)),
+                                          ? colorScheme.onSurfaceVariant
+                                          : colorScheme.onSurfaceVariant
+                                                .withValues(alpha: 0.3)),
                               ),
                               const SizedBox(width: 6),
                               Text(
                                 '${timeFormat.format(slot)} - ${timeFormat.format(endTime)}',
                                 style: TextStyle(
                                   fontSize: 11.5,
-                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.w500,
                                   color: isSelected
                                       ? colorScheme.onPrimary
                                       : (isValid
-                                          ? colorScheme.onSurface
-                                          : colorScheme.onSurfaceVariant.withValues(alpha: 0.3)),
+                                            ? colorScheme.onSurface
+                                            : colorScheme.onSurfaceVariant
+                                                  .withValues(alpha: 0.3)),
                                 ),
                               ),
                             ],
@@ -320,7 +348,8 @@ class InterviewSchedulerModal extends StatelessWidget {
                               } else {
                                 AppFeedback.showError(
                                   context,
-                                  viewModel.errorMessage ?? 'Failed to schedule slots.',
+                                  viewModel.errorMessage ??
+                                      'Failed to schedule slots.',
                                 );
                               }
                             }

@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
 import '../../domain/entities/job_entity.dart';
@@ -97,23 +99,21 @@ class JobRepository {
     required List<DateTime> slots,
   }) async {
     final db = await database.database;
-    final slotsJson = jsonEncode(slots.map((d) => d.toIso8601String()).toList());
+    final slotsJson = jsonEncode(
+      slots.map((d) => d.toIso8601String()).toList(),
+    );
     final now = DateTime.now().toIso8601String();
 
-    await db.insert(
-      DatabaseTables.applications,
-      {
-        'id': 'app_${jobId}_$userId',
-        'job_id': jobId,
-        'user_id': userId,
-        'status': 'interviewScheduled',
-        'cover_note': 'Interview slots proposed by candidate.',
-        'scheduled_slots': slotsJson,
-        'applied_at': now,
-        'updated_at': now,
-      },
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await db.insert(DatabaseTables.applications, {
+      'id': 'app_${jobId}_$userId',
+      'job_id': jobId,
+      'user_id': userId,
+      'status': 'interviewScheduled',
+      'cover_note': 'Interview slots proposed by candidate.',
+      'scheduled_slots': slotsJson,
+      'applied_at': now,
+      'updated_at': now,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
 
     await db.update(
       DatabaseTables.jobs,

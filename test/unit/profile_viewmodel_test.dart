@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/presentation/profile/viewmodels/profile_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -46,22 +47,28 @@ void main() {
       expect(viewModel.profile!.company, equals('Global Tech Systems'));
     });
 
-    test('addExperience inserts new role to start of experiences list', () async {
-      await viewModel.loadProfile();
-      final initialCount = viewModel.profile!.experiences.length;
+    test(
+      'addExperience inserts new role to start of experiences list',
+      () async {
+        await viewModel.loadProfile();
+        final initialCount = viewModel.profile!.experiences.length;
 
-      await viewModel.addExperience(
-        role: 'Chief Architect',
-        company: 'NextGen AI Mobility',
-        location: 'Austin, TX',
-        startDate: '2024',
-        endDate: 'Present',
-        isCurrent: true,
-        description: 'Pioneered on-device intelligence architecture.',
-      );
+        await viewModel.addExperience(
+          role: 'Chief Architect',
+          company: 'NextGen AI Mobility',
+          location: 'Austin, TX',
+          startDate: '2024',
+          endDate: 'Present',
+          isCurrent: true,
+          description: 'Pioneered on-device intelligence architecture.',
+        );
 
-      expect(viewModel.profile!.experiences.length, equals(initialCount + 1));
-      expect(viewModel.profile!.experiences.first.role, equals('Chief Architect'));
-    });
+        expect(viewModel.profile!.experiences.length, equals(initialCount + 1));
+        expect(
+          viewModel.profile!.experiences.first.role,
+          equals('Chief Architect'),
+        );
+      },
+    );
   });
 }

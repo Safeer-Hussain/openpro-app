@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../domain/entities/job_entity.dart';
 import '../../viewmodels/job_feed_viewmodel.dart';
 import 'match_score_ring.dart';
@@ -44,7 +45,9 @@ class JobCard extends StatelessWidget {
               : colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+            color: isSelected
+                ? colorScheme.primary
+                : colorScheme.outlineVariant,
             width: isSelected ? 1.5 : 1.0,
           ),
         ),
@@ -93,9 +96,14 @@ class JobCard extends StatelessWidget {
               children: [
                 Flexible(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
-                      color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                      color: colorScheme.primaryContainer.withValues(
+                        alpha: 0.5,
+                      ),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -184,7 +192,11 @@ class JobCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        Icon(Icons.verified_rounded, size: 14, color: colorScheme.primary),
+                        Icon(
+                          Icons.verified_rounded,
+                          size: 14,
+                          color: colorScheme.primary,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 2),
@@ -211,7 +223,10 @@ class JobCard extends StatelessWidget {
             runSpacing: 6,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.primaryContainer.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(6),
@@ -226,7 +241,10 @@ class JobCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(6),
@@ -241,7 +259,10 @@ class JobCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(6),
@@ -249,7 +270,11 @@ class JobCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.location_on_outlined, size: 13, color: colorScheme.onSurfaceVariant),
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: 13,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       job.workplaceType,
@@ -287,7 +312,9 @@ class JobCard extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.7,
+                  ),
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(color: colorScheme.outlineVariant),
                 ),
@@ -313,7 +340,11 @@ class JobCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.person_outline_rounded, size: 16, color: colorScheme.primary),
+                Icon(
+                  Icons.person_outline_rounded,
+                  size: 16,
+                  color: colorScheme.primary,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -338,14 +369,21 @@ class JobCard extends StatelessWidget {
             children: [
               IconButton.outlined(
                 icon: Icon(
-                  job.isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-                  color: job.isBookmarked ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                  job.isBookmarked
+                      ? Icons.bookmark_rounded
+                      : Icons.bookmark_border_rounded,
+                  color: job.isBookmarked
+                      ? colorScheme.primary
+                      : colorScheme.onSurfaceVariant,
                 ),
                 onPressed: () => vm.toggleBookmark(job.id),
               ),
               const SizedBox(width: 8),
               IconButton.outlined(
-                icon: Icon(Icons.share_outlined, color: colorScheme.onSurfaceVariant),
+                icon: Icon(
+                  Icons.share_outlined,
+                  color: colorScheme.onSurfaceVariant,
+                ),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -358,8 +396,12 @@ class JobCard extends StatelessWidget {
               Expanded(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: job.isApplied ? colorScheme.tertiary : colorScheme.primary,
-                    foregroundColor: job.isApplied ? colorScheme.onTertiary : colorScheme.onPrimary,
+                    backgroundColor: job.isApplied
+                        ? colorScheme.tertiary
+                        : colorScheme.primary,
+                    foregroundColor: job.isApplied
+                        ? colorScheme.onTertiary
+                        : colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -367,12 +409,17 @@ class JobCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                   icon: Icon(
-                    job.isApplied ? Icons.check_circle_outline_rounded : Icons.flash_on_rounded,
+                    job.isApplied
+                        ? Icons.check_circle_outline_rounded
+                        : Icons.flash_on_rounded,
                     size: 18,
                   ),
                   label: Text(
                     job.isApplied ? 'Application Active' : '1-Tap Smart Apply',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                    ),
                   ),
                   onPressed: () {
                     if (job.isApplied) {
@@ -394,7 +441,11 @@ class JobCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge(BuildContext context, String status, ColorScheme colorScheme) {
+  Widget _buildStatusBadge(
+    BuildContext context,
+    String status,
+    ColorScheme colorScheme,
+  ) {
     String label = 'Open';
     Color bg = colorScheme.surfaceContainer;
     Color fg = colorScheme.onSurfaceVariant;

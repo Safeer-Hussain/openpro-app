@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/job_entity.dart';
 import '../../viewmodels/job_feed_viewmodel.dart';
 import 'salary_distribution_card.dart';
+
 import 'package:provider/provider.dart';
 
 class SmartApplyModal extends StatefulWidget {
@@ -17,7 +19,9 @@ class SmartApplyModal extends StatefulWidget {
 class _SmartApplyModalState extends State<SmartApplyModal> {
   final _formKey = GlobalKey<FormState>();
   final _coverNoteController = TextEditingController();
-  final _portfolioController = TextEditingController(text: 'https://github.com/Safeer-Hussain');
+  final _portfolioController = TextEditingController(
+    text: 'https://github.com/Safeer-Hussain',
+  );
   bool _isSubmitting = false;
 
   @override
@@ -131,7 +135,11 @@ class _SmartApplyModalState extends State<SmartApplyModal> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.auto_awesome_rounded, color: colorScheme.primary, size: 20),
+                      Icon(
+                        Icons.auto_awesome_rounded,
+                        color: colorScheme.primary,
+                        size: 20,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
@@ -189,7 +197,8 @@ class _SmartApplyModalState extends State<SmartApplyModal> {
                     if (value == null || value.trim().isEmpty) {
                       return 'Portfolio link is required.';
                     }
-                    if (!value.startsWith('http://') && !value.startsWith('https://')) {
+                    if (!value.startsWith('http://') &&
+                        !value.startsWith('https://')) {
                       return 'Please enter a valid URL starting with https://';
                     }
                     return null;
@@ -220,7 +229,10 @@ class _SmartApplyModalState extends State<SmartApplyModal> {
                           )
                         : const Text(
                             'Confirm & Send Application',
-                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
                           ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
@@ -10,7 +11,9 @@ class ProfileRepository {
 
   ProfileRepository({required this.database});
 
-  Future<UserProfileEntity?> getUserProfile([String userId = AppConstants.defaultUserId]) async {
+  Future<UserProfileEntity?> getUserProfile([
+    String userId = AppConstants.defaultUserId,
+  ]) async {
     final db = await database.database;
     final userMaps = await db.query(
       DatabaseTables.userProfile,

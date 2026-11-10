@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/job_entity.dart';
 import '../../../social_feed/viewmodels/social_feed_viewmodel.dart';
+
 import 'package:provider/provider.dart';
 
 class ShareJobSheet extends StatelessWidget {
@@ -57,7 +59,11 @@ class ShareJobSheet extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   backgroundColor: colorScheme.surfaceContainerHighest,
-                  child: Icon(Icons.copy_rounded, color: colorScheme.primary, size: 20),
+                  child: Icon(
+                    Icons.copy_rounded,
+                    color: colorScheme.primary,
+                    size: 20,
+                  ),
                 ),
                 title: Text(
                   'Copy Job Summary',
@@ -69,7 +75,10 @@ class ShareJobSheet extends StatelessWidget {
                 ),
                 subtitle: Text(
                   'Copies formatted compensation, requirements, and recruiter details.',
-                  style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 onTap: () async {
                   final summary =
@@ -77,7 +86,10 @@ class ShareJobSheet extends StatelessWidget {
                   await Clipboard.setData(ClipboardData(text: summary));
                   if (context.mounted) {
                     Navigator.pop(context);
-                    AppFeedback.showSuccess(context, 'Job summary copied to clipboard.');
+                    AppFeedback.showSuccess(
+                      context,
+                      'Job summary copied to clipboard.',
+                    );
                   }
                 },
               ),
@@ -86,7 +98,11 @@ class ShareJobSheet extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   backgroundColor: colorScheme.surfaceContainerHighest,
-                  child: Icon(Icons.repeat_rounded, color: colorScheme.tertiary, size: 20),
+                  child: Icon(
+                    Icons.repeat_rounded,
+                    color: colorScheme.tertiary,
+                    size: 20,
+                  ),
                 ),
                 title: Text(
                   'Repost to OpenPro Network Feed',
@@ -98,7 +114,10 @@ class ShareJobSheet extends StatelessWidget {
                 ),
                 subtitle: Text(
                   'Shares this role directly with your professional followers.',
-                  style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 onTap: () async {
                   final socialVm = context.read<SocialFeedViewModel>();
@@ -109,7 +128,10 @@ class ShareJobSheet extends StatelessWidget {
                   );
                   if (context.mounted) {
                     Navigator.pop(context);
-                    AppFeedback.showSuccess(context, 'Opportunity reposted to Network Feed.');
+                    AppFeedback.showSuccess(
+                      context,
+                      'Opportunity reposted to Network Feed.',
+                    );
                   }
                 },
               ),
@@ -118,7 +140,11 @@ class ShareJobSheet extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   backgroundColor: colorScheme.surfaceContainerHighest,
-                  child: Icon(Icons.badge_rounded, color: colorScheme.secondary, size: 20),
+                  child: Icon(
+                    Icons.badge_rounded,
+                    color: colorScheme.secondary,
+                    size: 20,
+                  ),
                 ),
                 title: Text(
                   'Export AI Match Card',
@@ -130,11 +156,17 @@ class ShareJobSheet extends StatelessWidget {
                 ),
                 subtitle: Text(
                   'Generates a certified candidate compatibility summary for this role.',
-                  style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 onTap: () {
                   Navigator.pop(context);
-                  AppFeedback.showInfo(context, 'AI Match Card (${job.matchScore}%) exported.');
+                  AppFeedback.showInfo(
+                    context,
+                    'AI Match Card (${job.matchScore}%) exported.',
+                  );
                 },
               ),
               const SizedBox(height: 12),

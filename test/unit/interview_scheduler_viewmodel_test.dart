@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/domain/entities/job_entity.dart';
 import 'package:open_pro/presentation/jobs/viewmodels/interview_scheduler_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -116,27 +117,30 @@ void main() {
       expect(viewModel.canConfirm, isFalse);
     });
 
-    test('confirmInterview persists slots and updates job application status', () async {
-      final viewModel = InterviewSchedulerViewModel(
-        repository: mockJobRepo,
-        job: testJob,
-        currentTime: fixedNow,
-      );
+    test(
+      'confirmInterview persists slots and updates job application status',
+      () async {
+        final viewModel = InterviewSchedulerViewModel(
+          repository: mockJobRepo,
+          job: testJob,
+          currentTime: fixedNow,
+        );
 
-      final slot1 = DateTime(2026, 11, 7, 13, 30);
-      final slot2 = DateTime(2026, 11, 8, 10, 0);
-      viewModel.toggleSlot(slot1);
-      viewModel.toggleSlot(slot2);
+        final slot1 = DateTime(2026, 11, 7, 13, 30);
+        final slot2 = DateTime(2026, 11, 8, 10, 0);
+        viewModel.toggleSlot(slot1);
+        viewModel.toggleSlot(slot2);
 
-      final success = await viewModel.confirmInterview();
-      expect(success, isTrue);
+        final success = await viewModel.confirmInterview();
+        expect(success, isTrue);
 
-      final persistedSlots = await mockJobRepo.getScheduledSlots(
-        jobId: testJob.id,
-        userId: viewModel.userId,
-      );
-      expect(persistedSlots.length, equals(2));
-      expect(persistedSlots.first, equals(slot1));
-    });
+        final persistedSlots = await mockJobRepo.getScheduledSlots(
+          jobId: testJob.id,
+          userId: viewModel.userId,
+        );
+        expect(persistedSlots.length, equals(2));
+        expect(persistedSlots.first, equals(slot1));
+      },
+    );
   });
 }

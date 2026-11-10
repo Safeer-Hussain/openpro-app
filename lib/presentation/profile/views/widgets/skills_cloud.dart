@@ -23,7 +23,11 @@ class SkillsCloud extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.verified_user_outlined, size: 18, color: colorScheme.primary),
+              Icon(
+                Icons.verified_user_outlined,
+                size: 18,
+                color: colorScheme.primary,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -54,7 +58,11 @@ class SkillsCloud extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.check_circle_outline_rounded, size: 12, color: colorScheme.tertiary),
+                    Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 12,
+                      color: colorScheme.tertiary,
+                    ),
                     const SizedBox(width: 5),
                     Flexible(
                       child: Text(

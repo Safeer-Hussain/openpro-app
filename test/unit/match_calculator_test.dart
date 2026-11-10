@@ -3,18 +3,27 @@ import 'package:open_pro/core/utils/match_calculator.dart';
 
 void main() {
   group('MatchCalculator Unit Tests', () {
-    test('Calculates high match score for identical skills and role titles', () {
-      final score = MatchCalculator.calculateScore(
-        candidateSkills: ['Flutter', 'Dart', 'Provider', 'SQLite', 'Clean Architecture'],
-        candidateTitle: 'Senior Flutter Architect',
-        jobSkills: ['Flutter', 'Dart', 'Provider', 'SQLite'],
-        jobTitle: 'Principal Flutter Architect',
-        workplaceType: 'Remote',
-      );
+    test(
+      'Calculates high match score for identical skills and role titles',
+      () {
+        final score = MatchCalculator.calculateScore(
+          candidateSkills: [
+            'Flutter',
+            'Dart',
+            'Provider',
+            'SQLite',
+            'Clean Architecture',
+          ],
+          candidateTitle: 'Senior Flutter Architect',
+          jobSkills: ['Flutter', 'Dart', 'Provider', 'SQLite'],
+          jobTitle: 'Principal Flutter Architect',
+          workplaceType: 'Remote',
+        );
 
-      expect(score, greaterThanOrEqualTo(90));
-      expect(score, lessThanOrEqualTo(98));
-    });
+        expect(score, greaterThanOrEqualTo(90));
+        expect(score, lessThanOrEqualTo(98));
+      },
+    );
 
     test('Calculates lower score when skills have low overlap', () {
       final score = MatchCalculator.calculateScore(

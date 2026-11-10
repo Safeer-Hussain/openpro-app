@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/asset_paths.dart';
 import '../adaptive_scaffold.dart';
@@ -11,7 +13,8 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> with SingleTickerProviderStateMixin {
+class _SplashViewState extends State<SplashView>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
@@ -29,9 +32,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.2, end: 1.0).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.2,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeIn));
 
     _animController.repeat(reverse: true);
     _runSequentialInitialization();
@@ -83,10 +87,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                 builder: (context, child) {
                   return Transform.scale(
                     scale: _scaleAnimation.value,
-                    child: Opacity(
-                      opacity: _fadeAnimation.value,
-                      child: child,
-                    ),
+                    child: Opacity(opacity: _fadeAnimation.value, child: child),
                   );
                 },
                 child: Container(
@@ -134,7 +135,9 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                 height: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    colorScheme.primary,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

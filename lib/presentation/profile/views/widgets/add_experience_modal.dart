@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/profile_viewmodel.dart';
 
@@ -51,7 +52,10 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
     if (mounted) {
       setState(() => _isSaving = false);
       Navigator.pop(context);
-      AppFeedback.showSuccess(context, 'Role added to your executive timeline.');
+      AppFeedback.showSuccess(
+        context,
+        'Role added to your executive timeline.',
+      );
     }
   }
 
@@ -92,38 +96,75 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Role Title *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Role Title *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _roleController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'e.g. Lead Platform Engineer'),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Role title is required' : null,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. Lead Platform Engineer',
+                  ),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Role title is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Company / Organization *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Company / Organization *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _companyController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'e.g. NextGen Systems'),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Company is required' : null,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. NextGen Systems',
+                  ),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Company is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Location *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Location *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _locationController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'e.g. San Francisco, CA (Remote)'),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Location is required' : null,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. San Francisco, CA (Remote)',
+                  ),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Location is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(
                     'I currently work in this role',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   value: _isCurrent,
                   onChanged: (val) => setState(() => _isCurrent = val),
@@ -135,12 +176,24 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Start Year *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                          Text(
+                            'Start Year *',
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600,
+                              color: colorScheme.onSurface,
+                            ),
+                          ),
                           const SizedBox(height: 6),
                           TextFormField(
                             controller: _startDateController,
-                            style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                            validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: colorScheme.onSurface,
+                            ),
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'Required'
+                                : null,
                           ),
                         ],
                       ),
@@ -151,12 +204,24 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('End Year *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                            Text(
+                              'End Year *',
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w600,
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
                             const SizedBox(height: 6),
                             TextFormField(
                               controller: _endDateController,
-                              style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                              validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: colorScheme.onSurface,
+                              ),
+                              validator: (v) => (v == null || v.trim().isEmpty)
+                                  ? 'Required'
+                                  : null,
                             ),
                           ],
                         ),
@@ -165,14 +230,25 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text('Key Architectural Achievements *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Key Architectural Achievements *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _descriptionController,
                   maxLines: 3,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'Engineered high-throughput event buses, scaled to 3M MAU...'),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Description is required' : null,
+                  decoration: const InputDecoration(
+                    hintText: 'Engineered high-throughput event buses, scaled to 3M MAU...',
+                  ),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Description is required'
+                      : null,
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -182,7 +258,9 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
                       foregroundColor: colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: _isSaving ? null : _submit,
@@ -190,9 +268,15 @@ class _AddExperienceModalState extends State<AddExperienceModal> {
                         ? SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: colorScheme.onPrimary),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
                           )
-                        : const Text('Add to Profile', style: TextStyle(fontWeight: FontWeight.w700)),
+                        : const Text(
+                            'Add to Profile',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
                   ),
                 ),
                 const SizedBox(height: 12),

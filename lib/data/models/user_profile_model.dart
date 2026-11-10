@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import '../../domain/entities/user_profile_entity.dart';
 
 class ExperienceModel extends ExperienceEntity {
@@ -137,7 +138,8 @@ class UserProfileModel extends UserProfileEntity {
       experiences: experiences,
       projects: projects,
       profileViews: (map['profile_views'] as num?)?.toInt() ?? 0,
-      recruiterAppearances: (map['recruiter_appearances'] as num?)?.toInt() ?? 0,
+      recruiterAppearances:
+          (map['recruiter_appearances'] as num?)?.toInt() ?? 0,
       aiMatchRateBoost: (map['ai_match_rate_boost'] as num?)?.toInt() ?? 30,
     );
   }

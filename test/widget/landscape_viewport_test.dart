@@ -15,13 +15,16 @@ import 'package:open_pro/presentation/profile/viewmodels/profile_viewmodel.dart'
 import 'package:open_pro/presentation/social_feed/viewmodels/social_feed_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     if (!sl.isRegistered<LocalNotificationService>()) {
-      sl.registerSingleton<LocalNotificationService>(LocalNotificationService());
+      sl.registerSingleton<LocalNotificationService>(
+        LocalNotificationService(),
+      );
     }
   });
 
@@ -29,11 +32,24 @@ void main() {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => JobFeedViewModel(repository: MockJobRepository())),
-        ChangeNotifierProvider(create: (_) => SocialFeedViewModel(repository: MockSocialRepository())),
-        ChangeNotifierProvider(create: (_) => AiAssistantViewModel(repository: MockAiAssistantRepository())),
-        ChangeNotifierProvider(create: (_) => CommunityViewModel(repository: MockCommunityRepository())),
-        ChangeNotifierProvider(create: (_) => ProfileViewModel(repository: MockProfileRepository())),
+        ChangeNotifierProvider(
+          create: (_) => JobFeedViewModel(repository: MockJobRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              SocialFeedViewModel(repository: MockSocialRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              AiAssistantViewModel(repository: MockAiAssistantRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              CommunityViewModel(repository: MockCommunityRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProfileViewModel(repository: MockProfileRepository()),
+        ),
         ChangeNotifierProvider(
           create: (_) => DebugSettingsViewModel(
             mockInterceptor: MockNetworkInterceptor(),
@@ -49,7 +65,9 @@ void main() {
     );
   }
 
-  testWidgets('Zero RenderFlex overflow errors on 800x360 landscape viewport', (tester) async {
+  testWidgets('Zero RenderFlex overflow errors on 800x360 landscape viewport', (
+    tester,
+  ) async {
     // Set 800x360 landscape phone resolution
     tester.view.physicalSize = const Size(800, 360);
     tester.view.devicePixelRatio = 1.0;

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/repositories/job_repository.dart';
 import '../../../domain/entities/job_entity.dart';
 
@@ -92,14 +93,17 @@ class JobFeedViewModel extends ChangeNotifier {
 
       // Workplace filter
       if (_selectedWorkplaceFilter != 'All') {
-        if (job.workplaceType.toLowerCase() != _selectedWorkplaceFilter.toLowerCase()) {
+        if (job.workplaceType.toLowerCase() !=
+            _selectedWorkplaceFilter.toLowerCase()) {
           return false;
         }
       }
 
       // Seniority filter
       if (_selectedSeniorityFilter != 'All') {
-        if (!job.title.toLowerCase().contains(_selectedSeniorityFilter.toLowerCase())) {
+        if (!job.title.toLowerCase().contains(
+          _selectedSeniorityFilter.toLowerCase(),
+        )) {
           return false;
         }
       }
@@ -178,7 +182,10 @@ class JobFeedViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await repository.updateApplicationStatus(jobId: jobId, status: nextStatus);
+      await repository.updateApplicationStatus(
+        jobId: jobId,
+        status: nextStatus,
+      );
     } catch (_) {}
   }
 }

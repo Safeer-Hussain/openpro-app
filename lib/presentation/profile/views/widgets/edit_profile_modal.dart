@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/user_profile_entity.dart';
 import '../../viewmodels/profile_viewmodel.dart';
@@ -31,7 +32,9 @@ class _EditProfileModalState extends State<EditProfileModal> {
     _companyController = TextEditingController(text: widget.profile.company);
     _locationController = TextEditingController(text: widget.profile.location);
     _bioController = TextEditingController(text: widget.profile.bio);
-    _skillsController = TextEditingController(text: widget.profile.skills.join(', '));
+    _skillsController = TextEditingController(
+      text: widget.profile.skills.join(', '),
+    );
   }
 
   @override
@@ -69,7 +72,10 @@ class _EditProfileModalState extends State<EditProfileModal> {
     if (mounted) {
       setState(() => _isSaving = false);
       Navigator.pop(context);
-      AppFeedback.showSuccess(context, 'Executive Profile updated successfully.');
+      AppFeedback.showSuccess(
+        context,
+        'Executive Profile updated successfully.',
+      );
     }
   }
 
@@ -110,53 +116,107 @@ class _EditProfileModalState extends State<EditProfileModal> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text('Full Name *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Full Name *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _nameController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Name is required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Name is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Professional Headline *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Professional Headline *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _titleController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Headline is required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Headline is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Organization *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Organization *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _companyController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Company is required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Company is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Location *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Location *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _locationController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Location is required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Location is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Executive Bio *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Executive Bio *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _bioController,
                   maxLines: 3,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Bio is required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Bio is required'
+                      : null,
                 ),
                 const SizedBox(height: 12),
-                Text('Verified Skills (Comma Separated) *', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: colorScheme.onSurface)),
+                Text(
+                  'Verified Skills (Comma Separated) *',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _skillsController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Skills are required' : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Skills are required'
+                      : null,
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -166,7 +226,9 @@ class _EditProfileModalState extends State<EditProfileModal> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
                       foregroundColor: colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: _isSaving ? null : _submit,
@@ -174,9 +236,15 @@ class _EditProfileModalState extends State<EditProfileModal> {
                         ? SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: colorScheme.onPrimary),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
                           )
-                        : const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.w700)),
+                        : const Text(
+                            'Save Changes',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
                   ),
                 ),
                 const SizedBox(height: 12),

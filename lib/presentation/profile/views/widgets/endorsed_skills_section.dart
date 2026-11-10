@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../domain/entities/skill_endorsement.dart';
 import '../../viewmodels/profile_viewmodel.dart';
 
@@ -20,7 +21,10 @@ class EndorsedSkillsSection extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final totalEndorsements = items.fold<int>(0, (sum, item) => sum + item.count);
+        final totalEndorsements = items.fold<int>(
+          0,
+          (sum, item) => sum + item.count,
+        );
 
         return Container(
           width: double.infinity,
@@ -46,15 +50,18 @@ class EndorsedSkillsSection extends StatelessWidget {
                     child: Text(
                       'Peer Skill Endorsements',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: colorScheme.onSurface,
-                          ),
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.onSurface,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(8),
@@ -62,9 +69,9 @@ class EndorsedSkillsSection extends StatelessWidget {
                     child: Text(
                       '$totalEndorsements Endorsed',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: colorScheme.onPrimaryContainer,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -80,7 +87,12 @@ class EndorsedSkillsSection extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final skill = items[index];
-                  return _buildSkillItem(context, skill, viewModel, colorScheme);
+                  return _buildSkillItem(
+                    context,
+                    skill,
+                    viewModel,
+                    colorScheme,
+                  );
                 },
               ),
             ],
@@ -108,9 +120,9 @@ class EndorsedSkillsSection extends StatelessWidget {
                   Text(
                     skill.skillName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -118,9 +130,9 @@ class EndorsedSkillsSection extends StatelessWidget {
                   Text(
                     '${skill.count} ${skill.count == 1 ? "endorsement" : "endorsements"}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          fontSize: 11,
-                        ),
+                      color: colorScheme.onSurfaceVariant,
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ),
@@ -131,7 +143,10 @@ class EndorsedSkillsSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: skill.isEndorsedByMe
                       ? colorScheme.primaryContainer
@@ -159,11 +174,11 @@ class EndorsedSkillsSection extends StatelessWidget {
                     Text(
                       skill.isEndorsedByMe ? 'Endorsed' : 'Endorse',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: skill.isEndorsedByMe
-                                ? colorScheme.onPrimaryContainer
-                                : colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: skill.isEndorsedByMe
+                            ? colorScheme.onPrimaryContainer
+                            : colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -173,7 +188,12 @@ class EndorsedSkillsSection extends StatelessWidget {
         ),
         if (skill.topEndorsers.isNotEmpty) ...[
           const SizedBox(height: 8),
-          _buildAvatarStack(context, skill.topEndorsers, skill.count, colorScheme),
+          _buildAvatarStack(
+            context,
+            skill.topEndorsers,
+            skill.count,
+            colorScheme,
+          ),
         ],
       ],
     );
@@ -239,10 +259,8 @@ class EndorsedSkillsSection extends StatelessWidget {
             remainingCount > 0
                 ? 'Endorsed by ${endorsers.first.name} and $remainingCount others'
                 : 'Endorsed by ${endorsers.map((e) => e.name).join(", ")}',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10.5,
-                  color: colorScheme.onSurfaceVariant,
-                ),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(fontSize: 10.5, color: colorScheme.onSurfaceVariant),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

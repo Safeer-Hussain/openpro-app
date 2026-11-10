@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
@@ -47,7 +48,10 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
     if (mounted) {
       setState(() => _isPublishing = false);
       Navigator.pop(context);
-      AppFeedback.showSuccess(context, 'Story published successfully to network.');
+      AppFeedback.showSuccess(
+        context,
+        'Story published successfully to network.',
+      );
     }
   }
 
@@ -90,13 +94,19 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
                 const SizedBox(height: 16),
                 Text(
                   'Story Headline *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _titleController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'e.g. Scaling Flutter to 4M MAU'),
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. Scaling Flutter to 4M MAU',
+                  ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Headline is required.';
@@ -107,14 +117,21 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
                 const SizedBox(height: 14),
                 Text(
                   'Story Summary *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _subtitleController,
                   maxLines: 2,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'Key takeaway, metric, or architectural insight...'),
+                  decoration: const InputDecoration(
+                    hintText:
+                        'Key takeaway, metric, or architectural insight...',
+                  ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Summary is required.';
@@ -125,7 +142,11 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
                 const SizedBox(height: 16),
                 Text(
                   'Theme Background Template',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
@@ -159,7 +180,9 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
                       foregroundColor: colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: _isPublishing ? null : _submit,
@@ -167,9 +190,15 @@ class _CreateStoryModalState extends State<CreateStoryModal> {
                         ? SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: colorScheme.onPrimary),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
                           )
-                        : const Text('Publish Story (24h Live)', style: TextStyle(fontWeight: FontWeight.w700)),
+                        : const Text(
+                            'Publish Story (24h Live)',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
                   ),
                 ),
               ],

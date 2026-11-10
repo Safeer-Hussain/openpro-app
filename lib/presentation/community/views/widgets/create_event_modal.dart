@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/community_viewmodel.dart';
 
@@ -13,10 +14,18 @@ class CreateEventModal extends StatefulWidget {
 class _CreateEventModalState extends State<CreateEventModal> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
-  final _organizerController = TextEditingController(text: 'OpenPro Engineering Hub');
-  final _dateController = TextEditingController(text: 'Wednesday, Dec 2 • 11:00 AM PST');
-  final _locationController = TextEditingController(text: 'Virtual Studio Broadcast');
-  final _speakersController = TextEditingController(text: 'Safeer Hussain, Elena Rostova');
+  final _organizerController = TextEditingController(
+    text: 'OpenPro Engineering Hub',
+  );
+  final _dateController = TextEditingController(
+    text: 'Wednesday, Dec 2 • 11:00 AM PST',
+  );
+  final _locationController = TextEditingController(
+    text: 'Virtual Studio Broadcast',
+  );
+  final _speakersController = TextEditingController(
+    text: 'Safeer Hussain, Elena Rostova',
+  );
   bool _isVirtual = true;
   bool _isPublishing = false;
 
@@ -55,7 +64,10 @@ class _CreateEventModalState extends State<CreateEventModal> {
     if (mounted) {
       setState(() => _isPublishing = false);
       Navigator.pop(context);
-      AppFeedback.showSuccess(context, 'Executive Event created and published.');
+      AppFeedback.showSuccess(
+        context,
+        'Executive Event created and published.',
+      );
     }
   }
 
@@ -98,13 +110,19 @@ class _CreateEventModalState extends State<CreateEventModal> {
                 const SizedBox(height: 16),
                 Text(
                   'Event Title *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _titleController,
                   style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(hintText: 'e.g. Flutter 3.47 Impeller Benchmark Roundtable'),
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. Flutter 3.47 Impeller Benchmark Roundtable',
+                  ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Event title is required.';
@@ -115,7 +133,11 @@ class _CreateEventModalState extends State<CreateEventModal> {
                 const SizedBox(height: 12),
                 Text(
                   'Organizer Organization *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -131,7 +153,11 @@ class _CreateEventModalState extends State<CreateEventModal> {
                 const SizedBox(height: 12),
                 Text(
                   'Date & Time *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -147,7 +173,11 @@ class _CreateEventModalState extends State<CreateEventModal> {
                 const SizedBox(height: 12),
                 Text(
                   'Location / Stream URL *',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -165,7 +195,11 @@ class _CreateEventModalState extends State<CreateEventModal> {
                   contentPadding: EdgeInsets.zero,
                   title: Text(
                     'Virtual Broadcast Event',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   value: _isVirtual,
                   onChanged: (val) => setState(() => _isVirtual = val),
@@ -173,7 +207,11 @@ class _CreateEventModalState extends State<CreateEventModal> {
                 const SizedBox(height: 6),
                 Text(
                   'Keynote Speakers (comma separated)',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -188,7 +226,9 @@ class _CreateEventModalState extends State<CreateEventModal> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
                       foregroundColor: colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: _isPublishing ? null : _submit,
@@ -196,9 +236,15 @@ class _CreateEventModalState extends State<CreateEventModal> {
                         ? SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: colorScheme.onPrimary),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
                           )
-                        : const Text('Publish & Host Event', style: TextStyle(fontWeight: FontWeight.w700)),
+                        : const Text(
+                            'Publish & Host Event',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
                   ),
                 ),
                 const SizedBox(height: 12),

@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
 import '../../domain/entities/event_entity.dart';
@@ -29,14 +30,13 @@ class CommunityRepository {
 
     final current = GroupModel.fromMap(results.first);
     final willJoin = !current.isJoined;
-    final newCount = willJoin ? current.memberCount + 1 : (current.memberCount - 1).clamp(0, 999999);
+    final newCount = willJoin
+        ? current.memberCount + 1
+        : (current.memberCount - 1).clamp(0, 999999);
 
     await db.update(
       DatabaseTables.groups,
-      {
-        'is_joined': willJoin ? 1 : 0,
-        'member_count': newCount,
-      },
+      {'is_joined': willJoin ? 1 : 0, 'member_count': newCount},
       where: 'id = ?',
       whereArgs: [groupId],
     );
@@ -62,14 +62,13 @@ class CommunityRepository {
 
     final current = EventModel.fromMap(results.first);
     final willRsvp = !current.isRsvp;
-    final newCount = willRsvp ? current.attendeeCount + 1 : (current.attendeeCount - 1).clamp(0, 999999);
+    final newCount = willRsvp
+        ? current.attendeeCount + 1
+        : (current.attendeeCount - 1).clamp(0, 999999);
 
     await db.update(
       DatabaseTables.events,
-      {
-        'is_rsvp': willRsvp ? 1 : 0,
-        'attendee_count': newCount,
-      },
+      {'is_rsvp': willRsvp ? 1 : 0, 'attendee_count': newCount},
       where: 'id = ?',
       whereArgs: [eventId],
     );

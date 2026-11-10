@@ -45,7 +45,8 @@ class JobEntity {
 
   bool get isApplied => applicationStatus != 'none';
 
-  String get salaryBand => '\$${(salaryMin / 1000).toInt()}k - \$${(salaryMax / 1000).toInt()}k';
+  String get salaryBand =>
+      '\$${(salaryMin / 1000).toInt()}k - \$${(salaryMax / 1000).toInt()}k';
 
   double get salaryMedian => (salaryMin + salaryMax) / 2.0;
 

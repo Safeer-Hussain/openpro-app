@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
 import '../../domain/entities/chat_message_entity.dart';
@@ -22,7 +24,10 @@ class AiAssistantRepository {
 
   Future<List<ChatMessageEntity>> getMessages() async {
     final db = await database.database;
-    final maps = await db.query(DatabaseTables.chatMessages, orderBy: 'rowid ASC');
+    final maps = await db.query(
+      DatabaseTables.chatMessages,
+      orderBy: 'rowid ASC',
+    );
     return maps.map((m) => ChatMessageModel.fromMap(m)).toList();
   }
 

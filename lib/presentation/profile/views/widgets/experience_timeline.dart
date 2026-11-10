@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../domain/entities/user_profile_entity.dart';
 import 'add_experience_modal.dart';
 
@@ -30,7 +31,11 @@ class ExperienceTimeline extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.business_center_outlined, size: 18, color: colorScheme.primary),
+              Icon(
+                Icons.business_center_outlined,
+                size: 18,
+                color: colorScheme.primary,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -46,11 +51,17 @@ class ExperienceTimeline extends StatelessWidget {
               ),
               TextButton.icon(
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 4,
+                  ),
                   visualDensity: VisualDensity.compact,
                 ),
                 icon: const Icon(Icons.add, size: 15),
-                label: const Text('Add', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700)),
+                label: const Text(
+                  'Add',
+                  style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700),
+                ),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -88,9 +99,14 @@ class ExperienceTimeline extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
-                          color: exp.isCurrent ? colorScheme.primaryContainer : colorScheme.surfaceContainerHighest,
+                          color: exp.isCurrent
+                              ? colorScheme.primaryContainer
+                              : colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -98,7 +114,9 @@ class ExperienceTimeline extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
-                            color: exp.isCurrent ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                            color: exp.isCurrent
+                                ? colorScheme.primary
+                                : colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -107,12 +125,20 @@ class ExperienceTimeline extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     '${exp.company} • ${exp.location}',
-                    style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: colorScheme.primary),
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.primary,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     exp.description,
-                    style: TextStyle(fontSize: 12, height: 1.35, color: colorScheme.onSurfaceVariant),
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1.35,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               );
@@ -123,7 +149,11 @@ class ExperienceTimeline extends StatelessWidget {
             const SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.terminal_rounded, size: 18, color: colorScheme.secondary),
+                Icon(
+                  Icons.terminal_rounded,
+                  size: 18,
+                  color: colorScheme.secondary,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -145,7 +175,9 @@ class ExperienceTimeline extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.5,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: colorScheme.outlineVariant),
                 ),
@@ -154,12 +186,19 @@ class ExperienceTimeline extends StatelessWidget {
                   children: [
                     Text(
                       proj.title,
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: colorScheme.onSurface),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.onSurface,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       proj.description,
-                      style: TextStyle(fontSize: 11.5, color: colorScheme.onSurfaceVariant),
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Wrap(
@@ -167,14 +206,21 @@ class ExperienceTimeline extends StatelessWidget {
                       runSpacing: 4,
                       children: proj.techStack.map((tech) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: colorScheme.surfaceContainer,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
                             tech,
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: colorScheme.primary),
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: colorScheme.primary,
+                            ),
                           ),
                         );
                       }).toList(),

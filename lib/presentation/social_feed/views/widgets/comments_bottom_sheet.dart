@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
@@ -77,7 +78,10 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
 
               // Title
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 4,
+                ),
                 child: Row(
                   children: [
                     Text(
@@ -120,7 +124,10 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                     }
 
                     return ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       itemCount: comments.length,
                       separatorBuilder: (_, _) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {
@@ -130,7 +137,9 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                           decoration: BoxDecoration(
                             color: colorScheme.surfaceContainer,
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: colorScheme.outlineVariant),
+                            border: Border.all(
+                              color: colorScheme.outlineVariant,
+                            ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,13 +148,17 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                                 children: [
                                   CircleAvatar(
                                     radius: 14,
-                                    backgroundImage: AssetImage(comment.authorAvatar),
-                                    backgroundColor: colorScheme.surfaceContainerHighest,
+                                    backgroundImage: AssetImage(
+                                      comment.authorAvatar,
+                                    ),
+                                    backgroundColor:
+                                        colorScheme.surfaceContainerHighest,
                                   ),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           comment.authorName,
@@ -174,11 +187,20 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                                   ),
                                   if (comment.authorName == 'Safeer Hussain')
                                     IconButton(
-                                      icon: Icon(Icons.delete_outline_rounded,
-                                          size: 16, color: colorScheme.error),
+                                      icon: Icon(
+                                        Icons.delete_outline_rounded,
+                                        size: 16,
+                                        color: colorScheme.error,
+                                      ),
                                       onPressed: () {
-                                        vm.deleteComment(comment.id, widget.postId);
-                                        AppFeedback.showInfo(context, 'Comment deleted.');
+                                        vm.deleteComment(
+                                          comment.id,
+                                          widget.postId,
+                                        );
+                                        AppFeedback.showInfo(
+                                          context,
+                                          'Comment deleted.',
+                                        );
                                       },
                                     ),
                                 ],
@@ -206,7 +228,9 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
-                  border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    top: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: Form(
                   key: _formKey,
@@ -220,12 +244,17 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                       Expanded(
                         child: TextFormField(
                           controller: _commentController,
-                          style: TextStyle(fontSize: 13, color: colorScheme.onSurface),
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: colorScheme.onSurface,
+                          ),
                           decoration: InputDecoration(
                             hintText: 'Add an insightful comment...',
                             isDense: true,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 10,
+                            ),
                             fillColor: colorScheme.surfaceContainer,
                           ),
                           validator: (val) {

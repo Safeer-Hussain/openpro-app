@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../domain/calculators/salary_percentile_calculator.dart';
 import '../../../../domain/entities/job_entity.dart';
 
@@ -28,7 +29,9 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
   @override
   void initState() {
     super.initState();
-    _currentSalary = widget.candidateSalary ?? _parseSalary(widget.job?.salaryBand ?? '160000');
+    _currentSalary =
+        widget.candidateSalary ??
+        _parseSalary(widget.job?.salaryBand ?? '160000');
   }
 
   double _parseSalary(String raw) {
@@ -89,9 +92,9 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
                 child: Text(
                   'Market Compensation Benchmark',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -105,9 +108,9 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
                 child: Text(
                   benchmark.tier,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: colorScheme.onPrimaryContainer,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -115,9 +118,8 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
           const SizedBox(height: 6),
           Text(
             'Estimated for $role ($location)',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: colorScheme.onSurfaceVariant),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -128,16 +130,16 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
               Text(
                 'Target: ${_formatCurrency(_currentSalary)}',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                ),
               ),
               Text(
                 benchmark.formattedPercentile,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.primary,
-                    ),
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.primary,
+                ),
               ),
             ],
           ),
@@ -147,10 +149,30 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMarkerLabel(context, '25th', _formatCurrency(benchmark.p25), colorScheme),
-              _buildMarkerLabel(context, '50th (Median)', _formatCurrency(benchmark.p50), colorScheme),
-              _buildMarkerLabel(context, '75th', _formatCurrency(benchmark.p75), colorScheme),
-              _buildMarkerLabel(context, '90th', _formatCurrency(benchmark.p90), colorScheme),
+              _buildMarkerLabel(
+                context,
+                '25th',
+                _formatCurrency(benchmark.p25),
+                colorScheme,
+              ),
+              _buildMarkerLabel(
+                context,
+                '50th (Median)',
+                _formatCurrency(benchmark.p50),
+                colorScheme,
+              ),
+              _buildMarkerLabel(
+                context,
+                '75th',
+                _formatCurrency(benchmark.p75),
+                colorScheme,
+              ),
+              _buildMarkerLabel(
+                context,
+                '90th',
+                _formatCurrency(benchmark.p90),
+                colorScheme,
+              ),
             ],
           ),
         ],
@@ -158,7 +180,11 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
     );
   }
 
-  Widget _buildPercentileBar(BuildContext context, SalaryBenchmark benchmark, ColorScheme colorScheme) {
+  Widget _buildPercentileBar(
+    BuildContext context,
+    SalaryBenchmark benchmark,
+    ColorScheme colorScheme,
+  ) {
     final progress = (benchmark.percentile / 100.0).clamp(0.02, 0.98);
 
     return LayoutBuilder(
@@ -214,10 +240,11 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
                       ),
                     ),
                     Expanded(
-                      flex: ((100 - benchmark.percentile) * 10).toInt().clamp(1, 990),
-                      child: Container(
-                        color: Colors.transparent,
+                      flex: ((100 - benchmark.percentile) * 10).toInt().clamp(
+                        1,
+                        990,
                       ),
+                      child: Container(color: Colors.transparent),
                     ),
                   ],
                 ),
@@ -229,24 +256,27 @@ class _SalaryDistributionCardState extends State<SalaryDistributionCard> {
     );
   }
 
-  Widget _buildMarkerLabel(BuildContext context, String title, String value, ColorScheme colorScheme) {
+  Widget _buildMarkerLabel(
+    BuildContext context,
+    String title,
+    String value,
+    ColorScheme colorScheme,
+  ) {
     return Column(
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-                fontSize: 10,
-              ),
+          style: Theme.of(context).textTheme.labelSmall
+              ?.copyWith(color: colorScheme.onSurfaceVariant, fontSize: 10),
         ),
         const SizedBox(height: 2),
         Text(
           value,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-                fontSize: 11,
-              ),
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
+            fontSize: 11,
+          ),
         ),
       ],
     );

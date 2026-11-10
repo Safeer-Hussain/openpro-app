@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../viewmodels/community_viewmodel.dart';
 import 'widgets/create_event_modal.dart';
@@ -20,14 +21,22 @@ class CommunityHubView extends StatelessWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton.extended(
             heroTag: isGroupsTab ? 'fab_groups_create' : 'fab_events_create',
-            icon: Icon(isGroupsTab ? Icons.group_add_rounded : Icons.event_available_rounded, size: 20),
+            icon: Icon(
+              isGroupsTab
+                  ? Icons.group_add_rounded
+                  : Icons.event_available_rounded,
+              size: 20,
+            ),
             label: Text(
               isGroupsTab ? 'Explore Guilds' : '+ Host Event',
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
             ),
             onPressed: () {
               if (isGroupsTab) {
-                AppFeedback.showInfo(context, 'Browsing all verified tech guilds.');
+                AppFeedback.showInfo(
+                  context,
+                  'Browsing all verified tech guilds.',
+                );
               } else {
                 showModalBottomSheet(
                   context: context,
@@ -50,12 +59,24 @@ class CommunityHubView extends StatelessWidget {
                         segments: const [
                           ButtonSegment<int>(
                             value: 0,
-                            label: Text('Guilds', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
+                            label: Text(
+                              'Guilds',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ),
                             icon: Icon(Icons.hub_rounded, size: 16),
                           ),
                           ButtonSegment<int>(
                             value: 1,
-                            label: Text('Events', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
+                            label: Text(
+                              'Events',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12,
+                              ),
+                            ),
                             icon: Icon(Icons.event_seat_rounded, size: 16),
                           ),
                         ],
@@ -74,8 +95,8 @@ class CommunityHubView extends StatelessWidget {
                 child: vm.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : isGroupsTab
-                        ? _buildGroupsList(context, vm)
-                        : _buildEventsList(context, vm),
+                    ? _buildGroupsList(context, vm)
+                    : _buildEventsList(context, vm),
               ),
             ],
           ),

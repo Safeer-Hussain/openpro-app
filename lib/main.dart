@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'core/database/app_database.dart';
 import 'core/network/mock_network_interceptor.dart';
 import 'core/notifications/local_notification_service.dart';
@@ -38,13 +39,16 @@ class OpenProApp extends StatelessWidget {
           create: (_) => JobFeedViewModel(repository: sl<JobRepository>()),
         ),
         ChangeNotifierProvider(
-          create: (_) => SocialFeedViewModel(repository: sl<SocialRepository>()),
+          create: (_) =>
+              SocialFeedViewModel(repository: sl<SocialRepository>()),
         ),
         ChangeNotifierProvider(
-          create: (_) => AiAssistantViewModel(repository: sl<AiAssistantRepository>()),
+          create: (_) =>
+              AiAssistantViewModel(repository: sl<AiAssistantRepository>()),
         ),
         ChangeNotifierProvider(
-          create: (_) => CommunityViewModel(repository: sl<CommunityRepository>()),
+          create: (_) =>
+              CommunityViewModel(repository: sl<CommunityRepository>()),
         ),
         ChangeNotifierProvider(
           create: (_) => ProfileViewModel(repository: sl<ProfileRepository>()),

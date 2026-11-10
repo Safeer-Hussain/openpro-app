@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../core/database/app_database.dart';
 import '../../../core/network/mock_network_interceptor.dart';
 import '../../../core/notifications/local_notification_service.dart';
@@ -25,13 +26,19 @@ class DebugSettingsViewModel extends ChangeNotifier {
 
   void setLatency(int val) {
     _latencyMs = val;
-    mockInterceptor.updateSettings(latencyMs: _latencyMs, error503: _simulate503);
+    mockInterceptor.updateSettings(
+      latencyMs: _latencyMs,
+      error503: _simulate503,
+    );
     notifyListeners();
   }
 
   void setSimulate503(bool val) {
     _simulate503 = val;
-    mockInterceptor.updateSettings(latencyMs: _latencyMs, error503: _simulate503);
+    mockInterceptor.updateSettings(
+      latencyMs: _latencyMs,
+      error503: _simulate503,
+    );
     notifyListeners();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/utils/app_feedback.dart';
 import '../viewmodels/job_feed_viewmodel.dart';
 import 'widgets/job_card.dart';
@@ -16,10 +17,15 @@ class JobFeedView extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         heroTag: 'fab_job_feed',
         icon: const Icon(Icons.tune_rounded, size: 20),
-        label: const Text('Filter Roles', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+        label: const Text(
+          'Filter Roles',
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        ),
         onPressed: () => _showFilterDialog(context),
       ),
-      body: isLandscape ? _buildLandscapeLayout(context) : _buildPortraitLayout(context),
+      body: isLandscape
+          ? _buildLandscapeLayout(context)
+          : _buildPortraitLayout(context),
     );
   }
 
@@ -41,39 +47,40 @@ class JobFeedView extends StatelessWidget {
               child: jobs.isEmpty
                   ? _buildEmptyState(context, colorScheme)
                   : vm.viewType == JobFeedViewType.verticalFeed
-                      ? PageView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: jobs.length,
-                          itemBuilder: (context, index) {
-                            return SingleChildScrollView(
-                              physics: const ClampingScrollPhysics(),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8, bottom: 80),
-                                child: JobCard(job: jobs[index]),
-                              ),
-                            );
-                          },
-                        )
-                      : GridView.builder(
-                          padding: const EdgeInsets.fromLTRB(12, 8, 12, 80),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  ? PageView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: jobs.length,
+                      itemBuilder: (context, index) {
+                        return SingleChildScrollView(
+                          physics: const ClampingScrollPhysics(),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8, bottom: 80),
+                            child: JobCard(job: jobs[index]),
+                          ),
+                        );
+                      },
+                    )
+                  : GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 12, 80),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1,
                             mainAxisExtent: 145,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                           ),
-                          itemCount: jobs.length,
-                          itemBuilder: (context, index) {
-                            return JobCard(
-                              job: jobs[index],
-                              isCompact: true,
-                              onTap: () {
-                                vm.selectJob(index);
-                                vm.toggleViewType();
-                              },
-                            );
+                      itemCount: jobs.length,
+                      itemBuilder: (context, index) {
+                        return JobCard(
+                          job: jobs[index],
+                          isCompact: true,
+                          onTap: () {
+                            vm.selectJob(index);
+                            vm.toggleViewType();
                           },
-                        ),
+                        );
+                      },
+                    ),
             ),
           ],
         );
@@ -100,7 +107,9 @@ class JobFeedView extends StatelessWidget {
               width: 320,
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border(right: BorderSide(color: colorScheme.outlineVariant)),
+                  border: Border(
+                    right: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
                 child: Column(
                   children: [
@@ -109,7 +118,10 @@ class JobFeedView extends StatelessWidget {
                       child: jobs.isEmpty
                           ? _buildEmptyState(context, colorScheme)
                           : ListView.builder(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 8,
+                              ),
                               itemCount: jobs.length,
                               itemBuilder: (context, index) {
                                 final job = jobs[index];
@@ -139,7 +151,10 @@ class JobFeedView extends StatelessWidget {
               child: selectedJob == null
                   ? _buildEmptyState(context, colorScheme)
                   : SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       child: JobCard(job: selectedJob),
                     ),
             ),
@@ -167,7 +182,10 @@ class JobFeedView extends StatelessWidget {
                     hintText: 'Search roles, skills, or companies...',
                     prefixIcon: const Icon(Icons.search_rounded, size: 20),
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     suffixIcon: vm.searchQuery.isNotEmpty
                         ? IconButton(
                             icon: const Icon(Icons.clear_rounded, size: 18),
@@ -195,14 +213,49 @@ class JobFeedView extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildFilterChip('All', vm.selectedWorkplaceFilter, (f) => vm.setWorkplaceFilter(f), colorScheme),
-                _buildFilterChip('Remote', vm.selectedWorkplaceFilter, (f) => vm.setWorkplaceFilter(f), colorScheme),
-                _buildFilterChip('Hybrid', vm.selectedWorkplaceFilter, (f) => vm.setWorkplaceFilter(f), colorScheme),
-                _buildFilterChip('On-Site', vm.selectedWorkplaceFilter, (f) => vm.setWorkplaceFilter(f), colorScheme),
+                _buildFilterChip(
+                  'All',
+                  vm.selectedWorkplaceFilter,
+                  (f) => vm.setWorkplaceFilter(f),
+                  colorScheme,
+                ),
+                _buildFilterChip(
+                  'Remote',
+                  vm.selectedWorkplaceFilter,
+                  (f) => vm.setWorkplaceFilter(f),
+                  colorScheme,
+                ),
+                _buildFilterChip(
+                  'Hybrid',
+                  vm.selectedWorkplaceFilter,
+                  (f) => vm.setWorkplaceFilter(f),
+                  colorScheme,
+                ),
+                _buildFilterChip(
+                  'On-Site',
+                  vm.selectedWorkplaceFilter,
+                  (f) => vm.setWorkplaceFilter(f),
+                  colorScheme,
+                ),
                 const SizedBox(width: 8),
-                _buildFilterChip('Principal', vm.selectedSeniorityFilter, (f) => vm.setSeniorityFilter(f), colorScheme),
-                _buildFilterChip('Staff', vm.selectedSeniorityFilter, (f) => vm.setSeniorityFilter(f), colorScheme),
-                _buildFilterChip('Lead', vm.selectedSeniorityFilter, (f) => vm.setSeniorityFilter(f), colorScheme),
+                _buildFilterChip(
+                  'Principal',
+                  vm.selectedSeniorityFilter,
+                  (f) => vm.setSeniorityFilter(f),
+                  colorScheme,
+                ),
+                _buildFilterChip(
+                  'Staff',
+                  vm.selectedSeniorityFilter,
+                  (f) => vm.setSeniorityFilter(f),
+                  colorScheme,
+                ),
+                _buildFilterChip(
+                  'Lead',
+                  vm.selectedSeniorityFilter,
+                  (f) => vm.setSeniorityFilter(f),
+                  colorScheme,
+                ),
               ],
             ),
           ),
@@ -223,7 +276,10 @@ class JobFeedView extends StatelessWidget {
           hintText: 'Filter opportunities...',
           prefixIcon: const Icon(Icons.search_rounded, size: 18),
           isDense: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 8,
+          ),
         ),
         onChanged: vm.setSearchQuery,
       ),
@@ -261,7 +317,11 @@ class JobFeedView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.work_off_outlined, size: 48, color: colorScheme.onSurfaceVariant),
+          Icon(
+            Icons.work_off_outlined,
+            size: 48,
+            color: colorScheme.onSurfaceVariant,
+          ),
           const SizedBox(height: 12),
           Text(
             'No matching opportunities found',
@@ -295,9 +355,23 @@ class JobFeedView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Filter Opportunities', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cs.onSurface)),
+                Text(
+                  'Filter Opportunities',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: cs.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 16),
-                Text('Workplace Mode', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: cs.onSurface)),
+                Text(
+                  'Workplace Mode',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -312,31 +386,49 @@ class JobFeedView extends StatelessWidget {
                   }).toList(),
                 ),
                 const SizedBox(height: 16),
-                Text('Seniority Level', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: cs.onSurface)),
+                Text(
+                  'Seniority Level',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurface,
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
-                  children: ['All', 'Principal', 'Staff', 'Senior', 'Lead'].map((s) {
-                    return ChoiceChip(
-                      label: Text(s),
-                      selected: vm.selectedSeniorityFilter == s,
-                      onSelected: (val) {
-                        if (val) vm.setSeniorityFilter(s);
-                      },
-                    );
-                  }).toList(),
+                  children: ['All', 'Principal', 'Staff', 'Senior', 'Lead'].map(
+                    (s) {
+                      return ChoiceChip(
+                        label: Text(s),
+                        selected: vm.selectedSeniorityFilter == s,
+                        onSelected: (val) {
+                          if (val) vm.setSeniorityFilter(s);
+                        },
+                      );
+                    },
+                  ).toList(),
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
                   height: 44,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: cs.primary, foregroundColor: cs.onPrimary),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: cs.primary,
+                      foregroundColor: cs.onPrimary,
+                    ),
                     onPressed: () {
                       Navigator.pop(ctx);
-                      AppFeedback.showSuccess(context, 'Filters applied successfully.');
+                      AppFeedback.showSuccess(
+                        context,
+                        'Filters applied successfully.',
+                      );
                     },
-                    child: const Text('Apply Filters', style: TextStyle(fontWeight: FontWeight.w700)),
+                    child: const Text(
+                      'Apply Filters',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ],

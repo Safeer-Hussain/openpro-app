@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'markdown_post_body.dart';
 
 class MarkdownPostEditor extends StatefulWidget {
@@ -43,13 +44,21 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
     }
   }
 
-  void _insertMarkdown(String prefix, String suffix, {String defaultText = ''}) {
+  void _insertMarkdown(
+    String prefix,
+    String suffix, {
+    String defaultText = '',
+  }) {
     final text = widget.controller.text;
     final selection = widget.controller.selection;
 
     if (selection.isValid && selection.start != selection.end) {
       final selectedText = text.substring(selection.start, selection.end);
-      final newText = text.replaceRange(selection.start, selection.end, '$prefix$selectedText$suffix');
+      final newText = text.replaceRange(
+        selection.start,
+        selection.end,
+        '$prefix$selectedText$suffix',
+      );
       widget.controller.value = TextEditingValue(
         text: newText,
         selection: TextSelection(
@@ -74,7 +83,8 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
     final colorScheme = Theme.of(context).colorScheme;
     final currentLength = widget.controller.text.length;
     final isOverLimit = currentLength > widget.maxLength;
-    final isNearLimit = currentLength >= widget.warningThreshold && !isOverLimit;
+    final isNearLimit =
+        currentLength >= widget.warningThreshold && !isOverLimit;
 
     Color counterColor = colorScheme.onSurfaceVariant;
     if (isOverLimit) {
@@ -99,7 +109,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(15),
+              ),
               border: Border(
                 bottom: BorderSide(color: colorScheme.outlineVariant),
               ),
@@ -111,7 +123,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+                    border: Border.all(
+                      color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -141,7 +155,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
                   '$currentLength / ${widget.maxLength}',
                   style: TextStyle(
                     fontSize: 11.5,
-                    fontWeight: isNearLimit || isOverLimit ? FontWeight.bold : FontWeight.w500,
+                    fontWeight: isNearLimit || isOverLimit
+                        ? FontWeight.bold
+                        : FontWeight.w500,
                     color: counterColor,
                   ),
                 ),
@@ -154,9 +170,13 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.25),
+                color: colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.25,
+                ),
                 border: Border(
-                  bottom: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+                  bottom: BorderSide(
+                    color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                  ),
                 ),
               ),
               child: SingleChildScrollView(
@@ -167,42 +187,57 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
                       context,
                       tooltip: 'Bold',
                       icon: Icons.format_bold_rounded,
-                      onPressed: () => _insertMarkdown('**', '**', defaultText: 'bold text'),
+                      onPressed: () =>
+                          _insertMarkdown('**', '**', defaultText: 'bold text'),
                       colorScheme: colorScheme,
                     ),
                     _buildToolButton(
                       context,
                       tooltip: 'Italic',
                       icon: Icons.format_italic_rounded,
-                      onPressed: () => _insertMarkdown('*', '*', defaultText: 'italic text'),
+                      onPressed: () =>
+                          _insertMarkdown('*', '*', defaultText: 'italic text'),
                       colorScheme: colorScheme,
                     ),
                     _buildToolButton(
                       context,
                       tooltip: 'Header',
                       icon: Icons.title_rounded,
-                      onPressed: () => _insertMarkdown('### ', '\n', defaultText: 'Section Title'),
+                      onPressed: () => _insertMarkdown(
+                        '### ',
+                        '\n',
+                        defaultText: 'Section Title',
+                      ),
                       colorScheme: colorScheme,
                     ),
                     _buildToolButton(
                       context,
                       tooltip: 'Bullet List',
                       icon: Icons.format_list_bulleted_rounded,
-                      onPressed: () => _insertMarkdown('- ', '\n', defaultText: 'List item'),
+                      onPressed: () =>
+                          _insertMarkdown('- ', '\n', defaultText: 'List item'),
                       colorScheme: colorScheme,
                     ),
                     _buildToolButton(
                       context,
                       tooltip: 'Code Block',
                       icon: Icons.code_rounded,
-                      onPressed: () => _insertMarkdown('```dart\n', '\n```\n', defaultText: '// Code snippet'),
+                      onPressed: () => _insertMarkdown(
+                        '```dart\n',
+                        '\n```\n',
+                        defaultText: '// Code snippet',
+                      ),
                       colorScheme: colorScheme,
                     ),
                     _buildToolButton(
                       context,
                       tooltip: 'Hyperlink',
                       icon: Icons.link_rounded,
-                      onPressed: () => _insertMarkdown('[', '](https://example.com)', defaultText: 'Link Title'),
+                      onPressed: () => _insertMarkdown(
+                        '[',
+                        '](https://example.com)',
+                        defaultText: 'Link Title',
+                      ),
                       colorScheme: colorScheme,
                     ),
                   ],
@@ -245,7 +280,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
                       child: Text(
                         'Markdown live preview will appear here as you type.',
                         style: TextStyle(
-                          color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                          color: colorScheme.onSurfaceVariant.withValues(
+                            alpha: 0.6,
+                          ),
                           fontSize: 13,
                         ),
                       ),
@@ -259,11 +296,17 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: colorScheme.errorContainer,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(15)),
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(15),
+                ),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.warning_amber_rounded, size: 16, color: colorScheme.onErrorContainer),
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    size: 16,
+                    color: colorScheme.onErrorContainer,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -306,7 +349,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
             Icon(
               icon,
               size: 15,
-              color: isSelected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+              color: isSelected
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: 5),
             Text(
@@ -314,7 +359,9 @@ class _MarkdownPostEditorState extends State<MarkdownPostEditor> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                color: isSelected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+                color: isSelected
+                    ? colorScheme.onPrimary
+                    : colorScheme.onSurfaceVariant,
               ),
             ),
           ],

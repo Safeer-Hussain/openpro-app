@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
 import '../../domain/entities/comment_entity.dart';
@@ -58,14 +59,13 @@ class SocialRepository {
 
     final current = PostModel.fromMap(results.first);
     final willBeLiked = !current.isLiked;
-    final newCount = willBeLiked ? current.likesCount + 1 : (current.likesCount - 1).clamp(0, 999999);
+    final newCount = willBeLiked
+        ? current.likesCount + 1
+        : (current.likesCount - 1).clamp(0, 999999);
 
     await db.update(
       DatabaseTables.posts,
-      {
-        'is_liked': willBeLiked ? 1 : 0,
-        'likes_count': newCount,
-      },
+      {'is_liked': willBeLiked ? 1 : 0, 'likes_count': newCount},
       where: 'id = ?',
       whereArgs: [postId],
     );
@@ -144,11 +144,14 @@ class SocialRepository {
     await db.insert(DatabaseTables.comments, model.toMap());
 
     // Increment post comments_count
-    await db.rawUpdate('''
+    await db.rawUpdate(
+      '''
       UPDATE ${DatabaseTables.posts}
       SET comments_count = comments_count + 1
       WHERE id = ?
-    ''', [comment.postId]);
+    ''',
+      [comment.postId],
+    );
   }
 
   Future<void> deleteComment(String commentId, String postId) async {
@@ -160,11 +163,14 @@ class SocialRepository {
     );
 
     // Decrement post comments_count
-    await db.rawUpdate('''
+    await db.rawUpdate(
+      '''
       UPDATE ${DatabaseTables.posts}
       SET comments_count = CASE WHEN comments_count > 0 THEN comments_count - 1 ELSE 0 END
       WHERE id = ?
-    ''', [postId]);
+    ''',
+      [postId],
+    );
   }
 
   Future<List<StoryEntity>> getStories() async {
@@ -206,10 +212,13 @@ class SocialRepository {
 
   Future<void> reactToStory(String storyId) async {
     final db = await database.database;
-    await db.rawUpdate('''
+    await db.rawUpdate(
+      '''
       UPDATE ${DatabaseTables.stories}
       SET reaction_count = reaction_count + 1
       WHERE id = ?
-    ''', [storyId]);
+    ''',
+      [storyId],
+    );
   }
 }

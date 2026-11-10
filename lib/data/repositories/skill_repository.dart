@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/database/app_database.dart';
 import '../../core/database/database_tables.dart';
@@ -11,7 +12,9 @@ class SkillRepository implements SkillRepositoryInterface {
   SkillRepository({required this.database});
 
   @override
-  Future<List<SkillEndorsement>> getEndorsementsForUser([String userId = AppConstants.defaultUserId]) async {
+  Future<List<SkillEndorsement>> getEndorsementsForUser([
+    String userId = AppConstants.defaultUserId,
+  ]) async {
     final db = await database.database;
     final rows = await db.query(
       DatabaseTables.skillEndorsements,
@@ -31,7 +34,9 @@ class SkillRepository implements SkillRepositoryInterface {
       final skill = entry.key;
       final skillRows = entry.value;
 
-      final isEndorsedByMe = skillRows.any((r) => (r['is_endorsed_by_me'] as int? ?? 0) == 1);
+      final isEndorsedByMe = skillRows.any(
+        (r) => (r['is_endorsed_by_me'] as int? ?? 0) == 1,
+      );
       final endorsers = skillRows.map((r) {
         return Endorser(
           id: r['id'] as String,
@@ -79,20 +84,16 @@ class SkillRepository implements SkillRepositoryInterface {
         whereArgs: [userId, skillName],
       );
     } else {
-      await db.insert(
-        DatabaseTables.skillEndorsements,
-        {
-          'id': 'end_me_${DateTime.now().millisecondsSinceEpoch}',
-          'user_id': userId,
-          'skill_name': skillName,
-          'endorser_name': endorserName,
-          'endorser_title': endorserTitle,
-          'endorser_avatar': endorserAvatar,
-          'created_at': 'Just now',
-          'is_endorsed_by_me': 1,
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await db.insert(DatabaseTables.skillEndorsements, {
+        'id': 'end_me_${DateTime.now().millisecondsSinceEpoch}',
+        'user_id': userId,
+        'skill_name': skillName,
+        'endorser_name': endorserName,
+        'endorser_title': endorserTitle,
+        'endorser_avatar': endorserAvatar,
+        'created_at': 'Just now',
+        'is_endorsed_by_me': 1,
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
     final allForSkill = await db.query(
@@ -101,7 +102,9 @@ class SkillRepository implements SkillRepositoryInterface {
       whereArgs: [userId, skillName],
     );
 
-    final isEndorsed = allForSkill.any((r) => (r['is_endorsed_by_me'] as int? ?? 0) == 1);
+    final isEndorsed = allForSkill.any(
+      (r) => (r['is_endorsed_by_me'] as int? ?? 0) == 1,
+    );
     final endorsers = allForSkill.map((r) {
       return Endorser(
         id: r['id'] as String,

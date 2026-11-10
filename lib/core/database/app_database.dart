@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import '../constants/app_constants.dart';
 import '../constants/asset_paths.dart';
 import 'database_tables.dart';
@@ -22,7 +24,8 @@ class AppDatabase {
   }
 
   Future<Database> _initDatabase() async {
-    if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    if (!kIsWeb &&
+        (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
     }
@@ -35,11 +38,7 @@ class AppDatabase {
       path = p.join(docDir.path, 'openpro_app.db');
     }
 
-    final db = await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
+    final db = await openDatabase(path, version: 1, onCreate: _onCreate);
 
     await _ensureTables(db);
     return db;
@@ -75,7 +74,9 @@ class AppDatabase {
     final countResult = await db.rawQuery(
       'SELECT COUNT(*) as count FROM ${DatabaseTables.skillEndorsements}',
     );
-    final count = countResult.isNotEmpty ? (countResult.first['count'] as int? ?? 0) : 0;
+    final count = countResult.isNotEmpty
+        ? (countResult.first['count'] as int? ?? 0)
+        : 0;
     if (count == 0) {
       await _seedSkillEndorsements(db);
     }
@@ -281,8 +282,7 @@ class AppDatabase {
       'start_date': '2023 - Present',
       'end_date': 'Present',
       'is_current': 1,
-      'description':
-          'Led architecture of enterprise mobile platforms, optimized memory and 120 FPS render pipelines, and implemented on-device SQLite neural matching engines.',
+      'description': 'Led architecture of enterprise mobile platforms, optimized memory and 120 FPS render pipelines, and implemented on-device SQLite neural matching engines.',
     });
     await db.insert(DatabaseTables.experiences, {
       'id': 'exp_2',
@@ -293,8 +293,7 @@ class AppDatabase {
       'start_date': '2021',
       'end_date': '2023',
       'is_current': 0,
-      'description':
-          'Designed modular Clean Architecture patterns, managed a team of 9 engineers, and scaled Flutter apps to 4.2M monthly active users with 99.98% crash-free sessions.',
+      'description': 'Designed modular Clean Architecture patterns, managed a team of 9 engineers, and scaled Flutter apps to 4.2M monthly active users with 99.98% crash-free sessions.',
     });
     await db.insert(DatabaseTables.experiences, {
       'id': 'exp_3',
@@ -305,8 +304,7 @@ class AppDatabase {
       'start_date': '2019',
       'end_date': '2021',
       'is_current': 0,
-      'description':
-          'Engineered native bridge integrations for Android NDK and iOS Swift frameworks, authored custom shaders, and streamlined automated CI/CD releases.',
+      'description': 'Engineered native bridge integrations for Android NDK and iOS Swift frameworks, authored custom shaders, and streamlined automated CI/CD releases.',
     });
 
     // Seed Projects
@@ -314,9 +312,14 @@ class AppDatabase {
       'id': 'proj_1',
       'user_id': AppConstants.defaultUserId,
       'title': 'OpenPro Mobile Network',
-      'description':
-          'Production AI-powered professional network and recruiter matching platform with real-time SQLite graph mutations and adaptive master-detail views.',
-      'tech_stack': jsonEncode(['Flutter', 'Dart', 'Provider', 'SQLite', 'fl_chart']),
+      'description': 'Production AI-powered professional network and recruiter matching platform with real-time SQLite graph mutations and adaptive master-detail views.',
+      'tech_stack': jsonEncode([
+        'Flutter',
+        'Dart',
+        'Provider',
+        'SQLite',
+        'fl_chart',
+      ]),
       'github_url': 'https://github.com/Safeer-Hussain/openpro',
       'live_url': 'https://openpro.app',
     });
@@ -324,8 +327,7 @@ class AppDatabase {
       'id': 'proj_2',
       'user_id': AppConstants.defaultUserId,
       'title': 'QuantumState Reactive Engine',
-      'description':
-          'Zero-overhead atomic state container for high-throughput streaming dashboards with sub-millisecond dispatch times.',
+      'description': 'Zero-overhead atomic state container for high-throughput streaming dashboards with sub-millisecond dispatch times.',
       'tech_stack': jsonEncode(['Dart', 'C++ FFI', 'Reactive Streams']),
       'github_url': 'https://github.com/Safeer-Hussain/quantum-state',
       'live_url': 'https://pub.dev',
@@ -345,8 +347,7 @@ class AppDatabase {
         'salary_max': 245000,
         'salary_currency': 'USD',
         'equity': '0.15% - 0.35%',
-        'description':
-            'We are seeking a Principal Flutter Architect to design our enterprise multi-tenant mobile platform. You will spearhead architectural governance, performance benchmarking, and custom rendering engine integrations.',
+        'description': 'We are seeking a Principal Flutter Architect to design our enterprise multi-tenant mobile platform. You will spearhead architectural governance, performance benchmarking, and custom rendering engine integrations.',
         'requirements': jsonEncode([
           '7+ years engineering experience, 4+ years production Flutter & Dart',
           'Demonstrated mastery in Clean Architecture and modular state machines',
@@ -380,8 +381,7 @@ class AppDatabase {
         'salary_max': 260000,
         'salary_currency': 'USD',
         'equity': '0.2% - 0.5%',
-        'description':
-            'Architect on-device intelligence workflows integrating local LLM pipelines with high-speed Flutter UI controls. Work directly with foundational model researchers.',
+        'description': 'Architect on-device intelligence workflows integrating local LLM pipelines with high-speed Flutter UI controls. Work directly with foundational model researchers.',
         'requirements': jsonEncode([
           'Strong background in on-device AI integration and Flutter architectures',
           'Deep familiarity with streaming token APIs and state isolation',
@@ -413,8 +413,7 @@ class AppDatabase {
         'salary_max': 225000,
         'salary_currency': 'USD',
         'equity': '0.1% - 0.25%',
-        'description':
-            'Build next-generation banking interfaces with strict biometric authentication, real-time ledger synchronization, and sub-16ms chart animations.',
+        'description': 'Build next-generation banking interfaces with strict biometric authentication, real-time ledger synchronization, and sub-16ms chart animations.',
         'requirements': jsonEncode([
           'Experience building PCI-DSS compliant financial applications',
           'Expertise with fl_chart, custom painters, and animated transitions',
@@ -446,8 +445,7 @@ class AppDatabase {
         'salary_max': 200000,
         'salary_currency': 'USD',
         'equity': '0.05% - 0.15%',
-        'description':
-            'Design hermetic CI/CD pipelines, automated snapshot testing matrices, and binary size optimization tools across Android and iOS release targets.',
+        'description': 'Design hermetic CI/CD pipelines, automated snapshot testing matrices, and binary size optimization tools across Android and iOS release targets.',
         'requirements': jsonEncode([
           'Deep knowledge of GitHub Actions, Fastlane, and Gradle build pipelines',
           'Automated flutter analyze and coverage gates enforcement',
@@ -478,8 +476,7 @@ class AppDatabase {
         'salary_max': 190000,
         'salary_currency': 'USD',
         'equity': '0.08% - 0.18%',
-        'description':
-            'Develop HIPAA-compliant patient diagnostics and real-time medical sensor graphing dashboards in Flutter.',
+        'description': 'Develop HIPAA-compliant patient diagnostics and real-time medical sensor graphing dashboards in Flutter.',
         'requirements': jsonEncode([
           'Experience interfacing Bluetooth Low Energy (BLE) health devices',
           'Mastery in high-throughput data streams and reactive UI widgets',
@@ -512,9 +509,9 @@ class AppDatabase {
         'author_role': 'Senior Flutter Architect',
         'author_avatar': AssetPaths.safeerAvatar,
         'author_company': 'OpenPro Labs',
-        'content':
-            'Eliminating unnecessary widget rebuilds in complex data grids is critical. Here is our pattern using selector-driven state slicing in Provider combined with memoized layout passes.',
-        'code_snippet': '''// Selective state projection prevents unneeded frame drops
+        'content': 'Eliminating unnecessary widget rebuilds in complex data grids is critical. Here is our pattern using selector-driven state slicing in Provider combined with memoized layout passes.',
+        'code_snippet':
+            '''// Selective state projection prevents unneeded frame drops
 Selector<JobFeedProvider, bool>(
   selector: (_, p) => p.isBookmarked(jobId),
   builder: (context, isSaved, child) {
@@ -528,7 +525,12 @@ Selector<JobFeedProvider, bool>(
         'shares_count': 11,
         'is_liked': 1,
         'is_bookmarked': 1,
-        'tags': jsonEncode(['#Flutter', '#StateManagement', '#Performance', '#Architecture']),
+        'tags': jsonEncode([
+          '#Flutter',
+          '#StateManagement',
+          '#Performance',
+          '#Architecture',
+        ]),
         'image_url': null,
       },
       {
@@ -537,8 +539,7 @@ Selector<JobFeedProvider, bool>(
         'author_role': 'Principal Mobile Lead',
         'author_avatar': AssetPaths.fintechPrimeLogo,
         'author_company': 'FinTech Prime',
-        'content':
-            'Offline-first SQLite career graphs with immediate optimistic mutations completely transform mobile responsiveness. When a user bookmarks a role, save index state and notify listeners in under 4ms.',
+        'content': 'Offline-first SQLite career graphs with immediate optimistic mutations completely transform mobile responsiveness. When a user bookmarks a role, save index state and notify listeners in under 4ms.',
         'code_snippet': null,
         'code_language': null,
         'timestamp': '2h ago',
@@ -556,8 +557,7 @@ Selector<JobFeedProvider, bool>(
         'author_role': 'Director of Engineering',
         'author_avatar': AssetPaths.quantumAiLogo,
         'author_company': 'QuantumAI Labs',
-        'content':
-            'We benchmarked AI recruiter match accuracy: embedding candidate skill ontologies directly against verified repo contributions yields a 30% jump in interview conversion rates.',
+        'content': 'We benchmarked AI recruiter match accuracy: embedding candidate skill ontologies directly against verified repo contributions yields a 30% jump in interview conversion rates.',
         'code_snippet': '''final matchScore = MatchCalculator.calculateScore(
   candidateSkills: profile.skills,
   candidateTitle: profile.title,
@@ -572,7 +572,11 @@ Selector<JobFeedProvider, bool>(
         'shares_count': 45,
         'is_liked': 0,
         'is_bookmarked': 0,
-        'tags': jsonEncode(['#RecruiterTech', '#AIMatching', '#HiringEfficiency']),
+        'tags': jsonEncode([
+          '#RecruiterTech',
+          '#AIMatching',
+          '#HiringEfficiency',
+        ]),
         'image_url': null,
       },
     ];
@@ -681,8 +685,7 @@ Selector<JobFeedProvider, bool>(
         'id': 'grp_1',
         'name': 'Flutter & Native SDK Architects',
         'tagline': 'High-performance cross-platform system design',
-        'description':
-            'Dedicated community of Principal Engineers and Mobile Architects discussing runtime internals, custom engine patches, and enterprise Clean Architecture.',
+        'description': 'Dedicated community of Principal Engineers and Mobile Architects discussing runtime internals, custom engine patches, and enterprise Clean Architecture.',
         'banner_url': AssetPaths.flutterArchitectsCover,
         'member_count': 12480,
         'topic': 'Flutter & Mobile SDKs',
@@ -693,8 +696,7 @@ Selector<JobFeedProvider, bool>(
         'id': 'grp_2',
         'name': 'Applied AI & LLM Systems',
         'tagline': 'On-device intelligence and neural graph architectures',
-        'description':
-            'Exploring the frontier of edge AI, token streaming optimizations, vector index quantization, and recruiter matching algorithms.',
+        'description': 'Exploring the frontier of edge AI, token streaming optimizations, vector index quantization, and recruiter matching algorithms.',
         'banner_url': AssetPaths.aiLlmCover,
         'member_count': 9820,
         'topic': 'Artificial Intelligence',
@@ -705,8 +707,7 @@ Selector<JobFeedProvider, bool>(
         'id': 'grp_3',
         'name': 'AWS & Cloud DevOps Guild',
         'tagline': 'Zero-downtime infrastructure and hermetic build matrices',
-        'description':
-            'Best practices for mobile CI/CD pipelines, automated canary deployments, and container orchestration.',
+        'description': 'Best practices for mobile CI/CD pipelines, automated canary deployments, and container orchestration.',
         'banner_url': AssetPaths.cloudDevopsCover,
         'member_count': 7430,
         'topic': 'Cloud & DevOps',
@@ -717,8 +718,7 @@ Selector<JobFeedProvider, bool>(
         'id': 'grp_4',
         'name': 'FinTech Leaders & Engineering VPs',
         'tagline': 'Financial safety, cryptographic ledgers, and scale',
-        'description':
-            'Executive leadership forum for fintech technical directors managing high-throughput transaction systems.',
+        'description': 'Executive leadership forum for fintech technical directors managing high-throughput transaction systems.',
         'banner_url': AssetPaths.fintechLeadersCover,
         'member_count': 5120,
         'topic': 'FinTech & Leadership',
@@ -794,8 +794,7 @@ Selector<JobFeedProvider, bool>(
     await db.insert(DatabaseTables.chatMessages, {
       'id': 'msg_init',
       'sender': 'assistant',
-      'content':
-          'Welcome Safeer. I am your OpenPro Career Assistant. I have indexed your skills, career history, and active job applications from your local graph. How can I assist your career progression today?',
+      'content': 'Welcome Safeer. I am your OpenPro Career Assistant. I have indexed your skills, career history, and active job applications from your local graph. How can I assist your career progression today?',
       'timestamp': 'Just now',
       'action_chips': jsonEncode([
         'Analyze My Match for Senior Flutter Roles',

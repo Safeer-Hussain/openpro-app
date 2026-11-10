@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
@@ -16,7 +17,9 @@ class _CreatePostModalState extends State<CreatePostModal> {
   final _formKey = GlobalKey<FormState>();
   final _contentController = TextEditingController();
   final _codeController = TextEditingController();
-  final _tagsController = TextEditingController(text: '#Flutter #Architecture #CleanCode');
+  final _tagsController = TextEditingController(
+    text: '#Flutter #Architecture #CleanCode',
+  );
   bool _includeCode = false;
   bool _isPublishing = false;
 
@@ -39,7 +42,10 @@ class _CreatePostModalState extends State<CreatePostModal> {
       return;
     }
     if (content.length > 2000) {
-      AppFeedback.showError(context, 'Post exceeds maximum limit of 2,000 characters.');
+      AppFeedback.showError(
+        context,
+        'Post exceeds maximum limit of 2,000 characters.',
+      );
       return;
     }
 
@@ -128,9 +134,7 @@ class _CreatePostModalState extends State<CreatePostModal> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                MarkdownPostEditor(
-                  controller: _contentController,
-                ),
+                MarkdownPostEditor(controller: _contentController),
                 const SizedBox(height: 12),
 
                 // Toggle Code Snippet
@@ -138,7 +142,11 @@ class _CreatePostModalState extends State<CreatePostModal> {
                   contentPadding: EdgeInsets.zero,
                   title: Text(
                     'Attach Code Snippet',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   value: _includeCode,
                   onChanged: (val) => setState(() => _includeCode = val),
@@ -160,7 +168,11 @@ class _CreatePostModalState extends State<CreatePostModal> {
                 const SizedBox(height: 12),
                 Text(
                   'Hashtags',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: colorScheme.onSurface),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -178,7 +190,9 @@ class _CreatePostModalState extends State<CreatePostModal> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
                       foregroundColor: colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: _isPublishing ? null : _submit,
@@ -186,9 +200,18 @@ class _CreatePostModalState extends State<CreatePostModal> {
                         ? SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: colorScheme.onPrimary),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
                           )
-                        : const Text('Publish Post', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                        : const Text(
+                            'Publish Post',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
                   ),
                 ),
                 const SizedBox(height: 12),

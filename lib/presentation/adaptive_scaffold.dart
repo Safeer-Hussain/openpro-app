@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
 import '../core/constants/asset_paths.dart';
 import '../core/notifications/local_notification_service.dart';
 import '../core/services/service_locator.dart';
@@ -48,7 +50,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
   }
 
   void _initConnectivity() {
-    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((results) {
+    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
+      results,
+    ) {
       final isNone = results.contains(ConnectivityResult.none);
       if (mounted && isNone != _isOffline) {
         setState(() => _isOffline = isNone);
@@ -111,7 +115,10 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                 padding: const EdgeInsets.only(right: 8),
                 child: Chip(
                   avatar: const Icon(Icons.cloud_off_rounded, size: 14),
-                  label: const Text('Offline Graph', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700)),
+                  label: const Text(
+                    'Offline Graph',
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+                  ),
                   backgroundColor: colorScheme.errorContainer,
                   side: BorderSide.none,
                   padding: EdgeInsets.zero,
@@ -127,7 +134,10 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                   Container(
                     width: double.infinity,
                     color: colorScheme.errorContainer,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 4,
+                    ),
                     child: Text(
                       'Offline Mode - Serving Local SQL Career Graph',
                       textAlign: TextAlign.center,
@@ -145,7 +155,11 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                             // Compact Left NavigationRail in landscape (Safe on 360dp phone height)
                             Container(
                               decoration: BoxDecoration(
-                                border: Border(right: BorderSide(color: colorScheme.outlineVariant)),
+                                border: Border(
+                                  right: BorderSide(
+                                    color: colorScheme.outlineVariant,
+                                  ),
+                                ),
                               ),
                               child: SingleChildScrollView(
                                 physics: const ClampingScrollPhysics(),
@@ -154,7 +168,8 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                                     minWidth: 56,
                                     labelType: NavigationRailLabelType.none,
                                     selectedIndex: _currentIndex,
-                                    onDestinationSelected: (val) => setState(() => _currentIndex = val),
+                                    onDestinationSelected: (val) =>
+                                        setState(() => _currentIndex = val),
                                     destinations: const [
                                       NavigationRailDestination(
                                         icon: Icon(Icons.work_outline_rounded),
@@ -168,7 +183,9 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                                       ),
                                       NavigationRailDestination(
                                         icon: Icon(Icons.auto_awesome_outlined),
-                                        selectedIcon: Icon(Icons.auto_awesome_rounded),
+                                        selectedIcon: Icon(
+                                          Icons.auto_awesome_rounded,
+                                        ),
                                         label: Text('AI'),
                                       ),
                                       NavigationRailDestination(
@@ -177,8 +194,12 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                                         label: Text('Guilds'),
                                       ),
                                       NavigationRailDestination(
-                                        icon: Icon(Icons.person_outline_rounded),
-                                        selectedIcon: Icon(Icons.person_rounded),
+                                        icon: Icon(
+                                          Icons.person_outline_rounded,
+                                        ),
+                                        selectedIcon: Icon(
+                                          Icons.person_rounded,
+                                        ),
                                         label: Text('Profile'),
                                       ),
                                     ],
@@ -205,17 +226,27 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                   borderRadius: BorderRadius.circular(16),
                   color: colorScheme.surfaceContainerHighest,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: colorScheme.primary, width: 1.5),
+                      border: Border.all(
+                        color: colorScheme.primary,
+                        width: 1.5,
+                      ),
                     ),
                     child: Row(
                       children: [
                         CircleAvatar(
                           radius: 18,
                           backgroundColor: colorScheme.primaryContainer,
-                          child: Icon(Icons.flash_on_rounded, size: 20, color: colorScheme.primary),
+                          child: Icon(
+                            Icons.flash_on_rounded,
+                            size: 20,
+                            color: colorScheme.primary,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -245,7 +276,8 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.close_rounded, size: 16),
-                          onPressed: () => setState(() => _activePushBanner = null),
+                          onPressed: () =>
+                              setState(() => _activePushBanner = null),
                         ),
                       ],
                     ),
@@ -258,7 +290,8 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
             ? null
             : NavigationBar(
                 selectedIndex: _currentIndex,
-                onDestinationSelected: (val) => setState(() => _currentIndex = val),
+                onDestinationSelected: (val) =>
+                    setState(() => _currentIndex = val),
                 destinations: const [
                   NavigationDestination(
                     icon: Icon(Icons.work_outline_rounded),

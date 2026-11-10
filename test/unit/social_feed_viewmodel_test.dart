@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_pro/presentation/social_feed/viewmodels/social_feed_viewmodel.dart';
+
 import '../helpers/mock_repositories.dart';
 
 void main() {
@@ -58,16 +59,25 @@ void main() {
       expect(viewModel.posts.first.content, contains('SQLite isolates'));
     });
 
-    test('addComment adds comment and increments post comments count', () async {
-      await viewModel.loadData();
-      final post = viewModel.posts.first;
-      final initialComments = post.commentsCount;
+    test(
+      'addComment adds comment and increments post comments count',
+      () async {
+        await viewModel.loadData();
+        final post = viewModel.posts.first;
+        final initialComments = post.commentsCount;
 
-      await viewModel.openComments(post.id);
-      await viewModel.addComment(postId: post.id, content: 'Insightful perspective on selectors!');
+        await viewModel.openComments(post.id);
+        await viewModel.addComment(
+          postId: post.id,
+          content: 'Insightful perspective on selectors!',
+        );
 
-      expect(viewModel.currentComments.length, equals(2));
-      expect(viewModel.posts.first.commentsCount, equals(initialComments + 1));
-    });
+        expect(viewModel.currentComments.length, equals(2));
+        expect(
+          viewModel.posts.first.commentsCount,
+          equals(initialComments + 1),
+        );
+      },
+    );
   });
 }

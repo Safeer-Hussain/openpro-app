@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/repositories/community_repository.dart';
 import '../../../domain/entities/event_entity.dart';
 import '../../../domain/entities/group_entity.dart';
@@ -46,7 +47,9 @@ class CommunityViewModel extends ChangeNotifier {
 
     final current = _groups[index];
     final willJoin = !current.isJoined;
-    final newMemberCount = willJoin ? current.memberCount + 1 : (current.memberCount - 1).clamp(0, 999999);
+    final newMemberCount = willJoin
+        ? current.memberCount + 1
+        : (current.memberCount - 1).clamp(0, 999999);
 
     final updated = current.copyWith(
       isJoined: willJoin,
@@ -71,7 +74,9 @@ class CommunityViewModel extends ChangeNotifier {
 
     final current = _events[index];
     final willRsvp = !current.isRsvp;
-    final newAttendeeCount = willRsvp ? current.attendeeCount + 1 : (current.attendeeCount - 1).clamp(0, 999999);
+    final newAttendeeCount = willRsvp
+        ? current.attendeeCount + 1
+        : (current.attendeeCount - 1).clamp(0, 999999);
 
     final updated = current.copyWith(
       isRsvp: willRsvp,
