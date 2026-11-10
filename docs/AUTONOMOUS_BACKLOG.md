@@ -52,7 +52,7 @@ The engineering assistant shall:
   - Widget test covering slot selection in `test/widget/interview_scheduler_test.dart`.
 
 ### Sprint 04: Markdown Technical Post Editor
-- [ ] **Task Definition:** Enhance the post creation modal with a live preview Markdown editor supporting fenced code blocks, bullet points, headers, and hyperlinks.
+- [x] **Task Definition:** Enhance the post creation modal with a live preview Markdown editor supporting fenced code blocks, bullet points, headers, and hyperlinks.
 - **Scope:** `lib/presentation/feed/widgets/markdown_post_editor.dart`, `lib/presentation/feed/widgets/markdown_post_body.dart`.
 - **Acceptance Criteria:**
   - Dual-mode editor: Edit tab and Preview tab with instant toggle.

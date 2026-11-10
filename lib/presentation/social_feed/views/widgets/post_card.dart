@@ -5,6 +5,7 @@ import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/post_entity.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
 import 'comments_bottom_sheet.dart';
+import 'markdown_post_body.dart';
 import 'share_post_sheet.dart';
 
 class PostCard extends StatelessWidget {
@@ -80,14 +81,7 @@ class PostCard extends StatelessWidget {
           const SizedBox(height: 12),
 
           // Content
-          Text(
-            post.content,
-            style: TextStyle(
-              fontSize: 14,
-              height: 1.45,
-              color: colorScheme.onSurface,
-            ),
-          ),
+          MarkdownPostBody(text: post.content),
           const SizedBox(height: 10),
 
           // Code Snippet Block (if any)

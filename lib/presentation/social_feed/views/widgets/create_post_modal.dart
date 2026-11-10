@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/constants/asset_paths.dart';
 import '../../../../core/utils/app_feedback.dart';
 import '../../viewmodels/social_feed_viewmodel.dart';
+import 'markdown_post_editor.dart';
 
 class CreatePostModal extends StatefulWidget {
   const CreatePostModal({super.key});
@@ -28,6 +29,20 @@ class _CreatePostModalState extends State<CreatePostModal> {
   }
 
   Future<void> _submit() async {
+    final content = _contentController.text.trim();
+    if (content.isEmpty) {
+      AppFeedback.showError(context, 'Post content cannot be empty.');
+      return;
+    }
+    if (content.length < 10) {
+      AppFeedback.showError(context, 'Please share at least 10 characters.');
+      return;
+    }
+    if (content.length > 2000) {
+      AppFeedback.showError(context, 'Post exceeds maximum limit of 2,000 characters.');
+      return;
+    }
+
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isPublishing = true);
@@ -40,7 +55,7 @@ class _CreatePostModalState extends State<CreatePostModal> {
         .toList();
 
     await vm.createPost(
-      content: _contentController.text.trim(),
+      content: content,
       codeSnippet: _includeCode && _codeController.text.trim().isNotEmpty
           ? _codeController.text.trim()
           : null,
@@ -113,22 +128,8 @@ class _CreatePostModalState extends State<CreatePostModal> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
+                MarkdownPostEditor(
                   controller: _contentController,
-                  maxLines: 5,
-                  style: TextStyle(fontSize: 14, color: colorScheme.onSurface),
-                  decoration: const InputDecoration(
-                    hintText: 'Share an architectural breakthrough, benchmark, or engineering lesson...',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Post content cannot be empty.';
-                    }
-                    if (value.trim().length < 10) {
-                      return 'Please share at least 10 characters.';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 12),
 
