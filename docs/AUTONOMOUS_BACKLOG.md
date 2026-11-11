@@ -70,7 +70,7 @@ The engineering assistant shall:
   - Unit tests verifying message state transitions in `test/unit/inmail_viewmodel_test.dart`.
 
 ### Sprint 06: Resume PDF Generator and Exporter
-- [ ] **Task Definition:** Build an on-device resume builder that serializes the user profile, work experience, education, and skills into a standardized executive text/PDF document layout.
+- [x] **Task Definition:** Build an on-device resume builder that serializes the user profile, work experience, education, and skills into a standardized executive text/PDF document layout.
 - **Scope:** `lib/core/utils/resume_exporter.dart`, `lib/presentation/profile/widgets/export_resume_dialog.dart`.
 - **Acceptance Criteria:**
   - Formats summary, timeline experience, skill cloud, and contact details into a clean markdown and printable document format.

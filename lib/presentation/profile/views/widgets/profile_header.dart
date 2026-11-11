@@ -6,6 +6,7 @@ import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/utils/app_feedback.dart';
 import '../../../../domain/entities/user_profile_entity.dart';
 import '../../viewmodels/profile_viewmodel.dart';
+import '../../widgets/export_resume_dialog.dart';
 import 'edit_profile_modal.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -106,6 +107,27 @@ class ProfileHeader extends StatelessWidget {
                     ),
                     tooltip: 'Recruiter & Latency Debug Drawer',
                     onPressed: () => Scaffold.of(context).openEndDrawer(),
+                  ),
+                  const SizedBox(width: 6),
+                  IconButton.outlined(
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.all(6),
+                    constraints: const BoxConstraints(),
+                    icon: Icon(
+                      Icons.description_outlined,
+                      size: 16,
+                      color: colorScheme.secondary,
+                    ),
+                    tooltip: 'Export Executive Resume',
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => ExportResumeDialog(
+                          profile: profile,
+                          endorsements: vm.endorsements,
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(width: 6),
                   IconButton.filledTonal(
@@ -252,6 +274,31 @@ class ProfileHeader extends StatelessWidget {
                     !profile.isHiring
                         ? 'Hiring Leader badge enabled.'
                         : 'Hiring Leader badge paused.',
+                  );
+                },
+              ),
+              ActionChip(
+                avatar: Icon(
+                  Icons.description_outlined,
+                  size: 14,
+                  color: colorScheme.secondary,
+                ),
+                label: const Text('Export Resume'),
+                backgroundColor: colorScheme.surfaceContainerHighest,
+                side: BorderSide(color: colorScheme.outlineVariant),
+                labelStyle: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: colorScheme.onSurface,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => ExportResumeDialog(
+                      profile: profile,
+                      endorsements: vm.endorsements,
+                    ),
                   );
                 },
               ),
