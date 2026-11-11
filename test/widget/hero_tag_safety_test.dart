@@ -10,6 +10,7 @@ import 'package:open_pro/presentation/adaptive_scaffold.dart';
 import 'package:open_pro/presentation/ai_assistant/viewmodels/ai_assistant_viewmodel.dart';
 import 'package:open_pro/presentation/community/viewmodels/community_viewmodel.dart';
 import 'package:open_pro/presentation/job_feed/viewmodels/job_feed_viewmodel.dart';
+import 'package:open_pro/presentation/messages/viewmodels/inmail_viewmodel.dart';
 import 'package:open_pro/presentation/profile/viewmodels/debug_settings_viewmodel.dart';
 import 'package:open_pro/presentation/profile/viewmodels/profile_viewmodel.dart';
 import 'package:open_pro/presentation/social_feed/viewmodels/social_feed_viewmodel.dart';
@@ -50,6 +51,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => ProfileViewModel(repository: mockProfileRepo),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => InmailViewModel(repository: MockInmailRepository()),
         ),
         ChangeNotifierProvider(
           create: (_) => DebugSettingsViewModel(

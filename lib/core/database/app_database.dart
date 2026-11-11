@@ -71,6 +71,26 @@ class AppDatabase {
       )
     ''');
 
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS ${DatabaseTables.inmailMessages} (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        sender_name TEXT NOT NULL,
+        sender_role TEXT NOT NULL,
+        sender_company TEXT NOT NULL,
+        sender_avatar TEXT NOT NULL,
+        category TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        body TEXT NOT NULL,
+        opportunity_title TEXT,
+        opportunity_salary TEXT,
+        status TEXT NOT NULL,
+        reply_content TEXT,
+        sent_at TEXT NOT NULL,
+        replied_at TEXT
+      )
+    ''');
+
     final countResult = await db.rawQuery(
       'SELECT COUNT(*) as count FROM ${DatabaseTables.skillEndorsements}',
     );
@@ -79,6 +99,16 @@ class AppDatabase {
         : 0;
     if (count == 0) {
       await _seedSkillEndorsements(db);
+    }
+
+    final inmailCountResult = await db.rawQuery(
+      'SELECT COUNT(*) as count FROM ${DatabaseTables.inmailMessages}',
+    );
+    final inmailCount = inmailCountResult.isNotEmpty
+        ? (inmailCountResult.first['count'] as int? ?? 0)
+        : 0;
+    if (inmailCount == 0) {
+      await _seedInmailMessages(db);
     }
   }
 
@@ -896,6 +926,84 @@ Selector<JobFeedProvider, bool>(
     }
   }
 
+  Future<void> _seedInmailMessages(Database db) async {
+    final messages = [
+      {
+        'id': 'inmail_1',
+        'user_id': AppConstants.defaultUserId,
+        'sender_name': 'Elena Rostova',
+        'sender_role': 'Director of Technical Talent',
+        'sender_company': 'CloudScale Global',
+        'sender_avatar': AssetPaths.cloudscaleLogo,
+        'category': 'recruiter',
+        'subject':
+            'Executive Staff Mobile Architect - Cloud Infrastructure Platform',
+        'body': 'Hi Safeer, your architectural work on offline SQLite sync and high-concurrency systems came up in our engineering leadership search. We are building our next-gen developer platform and would value your perspective.',
+        'opportunity_title': 'Executive Staff Mobile Architect',
+        'opportunity_salary': '\$210,000 - \$250,000 + Equity',
+        'status': 'unread',
+        'reply_content': null,
+        'sent_at': '2 hours ago',
+        'replied_at': null,
+      },
+      {
+        'id': 'inmail_2',
+        'user_id': AppConstants.defaultUserId,
+        'sender_name': 'Marcus Thorne',
+        'sender_role': 'VP Talent Science',
+        'sender_company': 'QuantumAI Labs',
+        'sender_avatar': AssetPaths.quantumAiLogo,
+        'category': 'recruiter',
+        'subject': 'Lead AI & Mobile Systems Engineer',
+        'body': 'Safeer, our team is developing real-time on-device AI inference workflows. Your background in Clean Architecture and responsive UI performance aligns directly with our Q1 expansion.',
+        'opportunity_title': 'Lead AI & Mobile Systems Engineer',
+        'opportunity_salary': '\$220,000 - \$260,000 + Stock',
+        'status': 'read',
+        'reply_content': null,
+        'sent_at': 'Yesterday',
+        'replied_at': null,
+      },
+      {
+        'id': 'inmail_3',
+        'user_id': AppConstants.defaultUserId,
+        'sender_name': 'Sarah Vance',
+        'sender_role': 'Head of Talent',
+        'sender_company': 'FinTech Prime',
+        'sender_avatar': AssetPaths.fintechPrimeLogo,
+        'category': 'recruiter',
+        'subject': 'Principal Mobile Systems Lead',
+        'body': 'Hello Safeer, we are scaling our high-frequency payment terminal mobile clients. We noticed your verified skill benchmarks and would love to connect.',
+        'opportunity_title': 'Principal Mobile Systems Lead',
+        'opportunity_salary': '\$195,000 - \$240,000',
+        'status': 'replied',
+        'reply_content': 'Interested, let us connect. I would be happy to review the technical specifications.',
+        'sent_at': '3 days ago',
+        'replied_at': '2 days ago',
+      },
+      {
+        'id': 'inmail_4',
+        'user_id': AppConstants.defaultUserId,
+        'sender_name': 'Alex Chen',
+        'sender_role': 'Community Organizer',
+        'sender_company': 'Flutter Architecture Guild',
+        'sender_avatar': AssetPaths.techcorpLogo,
+        'category': 'general',
+        'subject': 'Invitation: Keynote Speaker for Architecture Roundtable',
+        'body': 'Hi Safeer, would you be interested in delivering a 20-minute keynote on offline-first state architecture at our upcoming virtual roundtable?',
+        'opportunity_title': null,
+        'opportunity_salary': null,
+        'status': 'unread',
+        'reply_content': null,
+        'sent_at': '4 days ago',
+        'replied_at': null,
+      },
+    ];
+
+    for (final msg in messages) {
+      await db.insert(DatabaseTables.inmailMessages, msg);
+    }
+  }
+
   Future<void> resetDatabase() async {
     final db = await database;
     await db.delete(DatabaseTables.jobs);
@@ -910,6 +1018,7 @@ Selector<JobFeedProvider, bool>(
     await db.delete(DatabaseTables.chatMessages);
     await db.delete(DatabaseTables.skillEndorsements);
     await db.delete(DatabaseTables.applications);
+    await db.delete(DatabaseTables.inmailMessages);
     await _seedInitialData(db);
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../core/constants/asset_paths.dart';
 import '../core/notifications/local_notification_service.dart';
@@ -9,6 +10,8 @@ import '../core/services/service_locator.dart';
 import 'ai_assistant/views/ai_career_assistant_view.dart';
 import 'community/views/community_hub_view.dart';
 import 'job_feed/views/job_feed_view.dart';
+import 'messages/inmail_inbox_view.dart';
+import 'messages/viewmodels/inmail_viewmodel.dart';
 import 'profile/views/profile_view.dart';
 import 'social_feed/views/social_feed_view.dart';
 
@@ -124,6 +127,34 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
                   padding: EdgeInsets.zero,
                 ),
               ),
+            Consumer<InmailViewModel>(
+              builder: (context, inmailVm, _) {
+                final unread = inmailVm.totalUnreadCount;
+                return IconButton(
+                  tooltip: 'InMail Messages',
+                  icon: Badge(
+                    isLabelVisible: unread > 0,
+                    label: Text(
+                      unread.toString(),
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    child: const Icon(Icons.mail_outline_rounded),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const InmailInboxView(),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            const SizedBox(width: 4),
           ],
         ),
         body: Stack(

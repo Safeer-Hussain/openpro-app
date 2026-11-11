@@ -61,7 +61,7 @@ The engineering assistant shall:
   - Unit and widget tests in `test/widget/markdown_post_editor_test.dart`.
 
 ### Sprint 05: Recruiter Direct InMail Simulator
-- [ ] **Task Definition:** Implement an InMail communication channel allowing users to receive, inspect, and reply to inbound recruiter outreach messages.
+- [x] **Task Definition:** Implement an InMail communication channel allowing users to receive, inspect, and reply to inbound recruiter outreach messages.
 - **Scope:** `lib/domain/entities/inmail_message.dart`, `lib/presentation/messages/inmail_inbox_view.dart`, `lib/presentation/messages/inmail_detail_view.dart`.
 - **Acceptance Criteria:**
   - Tabular or list inbox separating "Recruiter Outreach" from "General Messages".

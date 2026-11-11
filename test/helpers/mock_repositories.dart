@@ -11,11 +11,13 @@ import 'package:open_pro/domain/entities/chat_message_entity.dart';
 import 'package:open_pro/domain/entities/comment_entity.dart';
 import 'package:open_pro/domain/entities/event_entity.dart';
 import 'package:open_pro/domain/entities/group_entity.dart';
+import 'package:open_pro/domain/entities/inmail_message.dart';
 import 'package:open_pro/domain/entities/job_entity.dart';
 import 'package:open_pro/domain/entities/post_entity.dart';
 import 'package:open_pro/domain/entities/skill_endorsement.dart';
 import 'package:open_pro/domain/entities/story_entity.dart';
 import 'package:open_pro/domain/entities/user_profile_entity.dart';
+import 'package:open_pro/domain/repositories/inmail_repository_interface.dart';
 
 class MockJobRepository extends JobRepository {
   List<JobEntity> inMemoryJobs;
@@ -585,5 +587,138 @@ class MockSkillRepository extends SkillRepository {
     );
     inMemoryEndorsements[idx] = updated;
     return updated;
+  }
+}
+
+class MockInmailRepository implements InmailRepositoryInterface {
+  List<InmailMessage> inMemoryMessages;
+
+  MockInmailRepository({List<InmailMessage>? messages})
+    : inMemoryMessages =
+          messages ??
+          [
+            const InmailMessage(
+              id: 'inmail_1',
+              userId: 'user_safeer',
+              senderName: 'Elena Rostova',
+              senderRole: 'Director of Technical Talent',
+              senderCompany: 'CloudScale Global',
+              senderAvatar: 'assets/images/cloudscale.png',
+              category: 'recruiter',
+              subject: 'Executive Staff Mobile Architect - Cloud Infrastructure Platform',
+              body: 'Hi Safeer, your architectural work on offline SQLite sync and high-concurrency systems came up in our engineering leadership search.',
+              opportunityTitle: 'Executive Staff Mobile Architect',
+              opportunitySalary: '\$210,000 - \$250,000 + Equity',
+              status: 'unread',
+              replyContent: null,
+              sentAt: '2 hours ago',
+              repliedAt: null,
+            ),
+            const InmailMessage(
+              id: 'inmail_2',
+              userId: 'user_safeer',
+              senderName: 'Marcus Thorne',
+              senderRole: 'VP Talent Science',
+              senderCompany: 'QuantumAI Labs',
+              senderAvatar: 'assets/images/quantum_ai.png',
+              category: 'recruiter',
+              subject: 'Lead AI & Mobile Systems Engineer',
+              body: 'Safeer, our team is developing real-time on-device AI inference workflows.',
+              opportunityTitle: 'Lead AI & Mobile Systems Engineer',
+              opportunitySalary: '\$220,000 - \$260,000 + Stock',
+              status: 'read',
+              replyContent: null,
+              sentAt: 'Yesterday',
+              repliedAt: null,
+            ),
+            const InmailMessage(
+              id: 'inmail_3',
+              userId: 'user_safeer',
+              senderName: 'Sarah Vance',
+              senderRole: 'Head of Talent',
+              senderCompany: 'FinTech Prime',
+              senderAvatar: 'assets/images/fintech_prime.png',
+              category: 'recruiter',
+              subject: 'Principal Mobile Systems Lead',
+              body: 'Hello Safeer, we are scaling our high-frequency payment terminal mobile clients.',
+              opportunityTitle: 'Principal Mobile Systems Lead',
+              opportunitySalary: '\$195,000 - \$240,000',
+              status: 'replied',
+              replyContent: 'Interested, let us connect. I would be happy to review the technical specifications.',
+              sentAt: '3 days ago',
+              repliedAt: '2 days ago',
+            ),
+            const InmailMessage(
+              id: 'inmail_4',
+              userId: 'user_safeer',
+              senderName: 'Alex Chen',
+              senderRole: 'Community Organizer',
+              senderCompany: 'Flutter Architecture Guild',
+              senderAvatar: 'assets/images/techcorp.png',
+              category: 'general',
+              subject:
+                  'Invitation: Keynote Speaker for Architecture Roundtable',
+              body: 'Hi Safeer, would you be interested in delivering a 20-minute keynote on offline-first state architecture at our upcoming virtual roundtable?',
+              opportunityTitle: null,
+              opportunitySalary: null,
+              status: 'unread',
+              replyContent: null,
+              sentAt: '4 days ago',
+              repliedAt: null,
+            ),
+          ];
+
+  @override
+  Future<List<InmailMessage>> getMessages({
+    String? category,
+    String? userId,
+  }) async {
+    var result = List<InmailMessage>.from(inMemoryMessages);
+    if (category != null && category.isNotEmpty) {
+      result = result.where((m) => m.category == category).toList();
+    }
+    if (userId != null && userId.isNotEmpty) {
+      result = result.where((m) => m.userId == userId).toList();
+    }
+    return result;
+  }
+
+  @override
+  Future<InmailMessage?> getMessageById(String id) async {
+    final idx = inMemoryMessages.indexWhere((m) => m.id == id);
+    if (idx != -1) return inMemoryMessages[idx];
+    return null;
+  }
+
+  @override
+  Future<void> markAsRead(String id) async {
+    final idx = inMemoryMessages.indexWhere((m) => m.id == id);
+    if (idx != -1 && inMemoryMessages[idx].status == 'unread') {
+      inMemoryMessages[idx] = inMemoryMessages[idx].copyWith(status: 'read');
+    }
+  }
+
+  @override
+  Future<InmailMessage> sendReply({
+    required String id,
+    required String replyContent,
+  }) async {
+    final idx = inMemoryMessages.indexWhere((m) => m.id == id);
+    if (idx == -1) {
+      throw StateError('Message not found');
+    }
+    final updated = inMemoryMessages[idx].copyWith(
+      status: 'replied',
+      replyContent: replyContent,
+      repliedAt: 'Just now',
+    );
+    inMemoryMessages[idx] = updated;
+    return updated;
+  }
+
+  @override
+  Future<int> getUnreadCount({String? category, String? userId}) async {
+    final messages = await getMessages(category: category, userId: userId);
+    return messages.where((m) => m.status == 'unread').length;
   }
 }
